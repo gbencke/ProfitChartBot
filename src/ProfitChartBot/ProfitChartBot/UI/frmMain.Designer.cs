@@ -32,20 +32,24 @@ namespace ProfitChartBot
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabConfiguracao = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnMostrarPosicoes = new System.Windows.Forms.Button();
+            this.btnTomarPosicao = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnZerarMercado = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnVendaMercado = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnCompraMercado = new System.Windows.Forms.Button();
             this.lblBotaoCompraMercado = new System.Windows.Forms.Label();
             this.tabLog = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.btnFechar = new System.Windows.Forms.Button();
             this.btnIniciar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnMostrarPosicoes = new System.Windows.Forms.Button();
-            this.btnTomarPosicao = new System.Windows.Forms.Button();
-            this.btnZerarMercado = new System.Windows.Forms.Button();
-            this.btnVendaMercado = new System.Windows.Forms.Button();
-            this.btnCompraMercado = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabConfiguracao.SuspendLayout();
             this.tabLog.SuspendLayout();
@@ -64,6 +68,10 @@ namespace ProfitChartBot
             // 
             // tabConfiguracao
             // 
+            this.tabConfiguracao.Controls.Add(this.button1);
+            this.tabConfiguracao.Controls.Add(this.label5);
+            this.tabConfiguracao.Controls.Add(this.button2);
+            this.tabConfiguracao.Controls.Add(this.label6);
             this.tabConfiguracao.Controls.Add(this.label4);
             this.tabConfiguracao.Controls.Add(this.btnMostrarPosicoes);
             this.tabConfiguracao.Controls.Add(this.btnTomarPosicao);
@@ -82,6 +90,73 @@ namespace ProfitChartBot
             this.tabConfiguracao.Text = "Configuracao";
             this.tabConfiguracao.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
+            this.button1.Location = new System.Drawing.Point(19, 108);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 32);
+            this.button1.TabIndex = 13;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(57, 114);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(213, 20);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Valor em R$, Posicao Aberta";
+            // 
+            // button2
+            // 
+            this.button2.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
+            this.button2.Location = new System.Drawing.Point(286, 108);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(32, 32);
+            this.button2.TabIndex = 11;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(324, 114);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(221, 20);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Numero de Contratos Abertos";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(57, 161);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(187, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Mostrar Posicoes na Tela";
+            // 
+            // btnMostrarPosicoes
+            // 
+            this.btnMostrarPosicoes.Image = global::ProfitChartBot.Properties.Resources.fullscreen_12_32;
+            this.btnMostrarPosicoes.Location = new System.Drawing.Point(19, 155);
+            this.btnMostrarPosicoes.Name = "btnMostrarPosicoes";
+            this.btnMostrarPosicoes.Size = new System.Drawing.Size(32, 32);
+            this.btnMostrarPosicoes.TabIndex = 8;
+            this.btnMostrarPosicoes.UseVisualStyleBackColor = true;
+            // 
+            // btnTomarPosicao
+            // 
+            this.btnTomarPosicao.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
+            this.btnTomarPosicao.Location = new System.Drawing.Point(19, 57);
+            this.btnTomarPosicao.Name = "btnTomarPosicao";
+            this.btnTomarPosicao.Size = new System.Drawing.Size(32, 32);
+            this.btnTomarPosicao.TabIndex = 7;
+            this.btnTomarPosicao.UseVisualStyleBackColor = true;
+            this.btnTomarPosicao.Click += new System.EventHandler(this.btnTomarPosicao_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -91,6 +166,16 @@ namespace ProfitChartBot
             this.label3.Size = new System.Drawing.Size(220, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "Indicador para Tomar Posicao";
+            // 
+            // btnZerarMercado
+            // 
+            this.btnZerarMercado.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
+            this.btnZerarMercado.Location = new System.Drawing.Point(286, 57);
+            this.btnZerarMercado.Name = "btnZerarMercado";
+            this.btnZerarMercado.Size = new System.Drawing.Size(32, 32);
+            this.btnZerarMercado.TabIndex = 5;
+            this.btnZerarMercado.UseVisualStyleBackColor = true;
+            this.btnZerarMercado.Click += new System.EventHandler(this.btnZerarMercado_Click);
             // 
             // label2
             // 
@@ -102,6 +187,16 @@ namespace ProfitChartBot
             this.label2.TabIndex = 4;
             this.label2.Text = "Botao de Zerar Posicao";
             // 
+            // btnVendaMercado
+            // 
+            this.btnVendaMercado.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
+            this.btnVendaMercado.Location = new System.Drawing.Point(286, 12);
+            this.btnVendaMercado.Name = "btnVendaMercado";
+            this.btnVendaMercado.Size = new System.Drawing.Size(32, 32);
+            this.btnVendaMercado.TabIndex = 3;
+            this.btnVendaMercado.UseVisualStyleBackColor = true;
+            this.btnVendaMercado.Click += new System.EventHandler(this.btnVendaMercado_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -111,6 +206,16 @@ namespace ProfitChartBot
             this.label1.Size = new System.Drawing.Size(191, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Botao de Venda Mercado";
+            // 
+            // btnCompraMercado
+            // 
+            this.btnCompraMercado.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
+            this.btnCompraMercado.Location = new System.Drawing.Point(19, 12);
+            this.btnCompraMercado.Name = "btnCompraMercado";
+            this.btnCompraMercado.Size = new System.Drawing.Size(32, 32);
+            this.btnCompraMercado.TabIndex = 1;
+            this.btnCompraMercado.UseVisualStyleBackColor = true;
+            this.btnCompraMercado.Click += new System.EventHandler(this.btnCompraMercado_Click);
             // 
             // lblBotaoCompraMercado
             // 
@@ -166,62 +271,6 @@ namespace ProfitChartBot
             this.btnIniciar.Text = "Iniciar";
             this.btnIniciar.UseVisualStyleBackColor = true;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(57, 112);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(187, 20);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Mostrar Posicoes na Tela";
-            // 
-            // btnMostrarPosicoes
-            // 
-            this.btnMostrarPosicoes.Image = global::ProfitChartBot.Properties.Resources.fullscreen_12_32;
-            this.btnMostrarPosicoes.Location = new System.Drawing.Point(19, 106);
-            this.btnMostrarPosicoes.Name = "btnMostrarPosicoes";
-            this.btnMostrarPosicoes.Size = new System.Drawing.Size(32, 32);
-            this.btnMostrarPosicoes.TabIndex = 8;
-            this.btnMostrarPosicoes.UseVisualStyleBackColor = true;
-            // 
-            // btnTomarPosicao
-            // 
-            this.btnTomarPosicao.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
-            this.btnTomarPosicao.Location = new System.Drawing.Point(19, 57);
-            this.btnTomarPosicao.Name = "btnTomarPosicao";
-            this.btnTomarPosicao.Size = new System.Drawing.Size(32, 32);
-            this.btnTomarPosicao.TabIndex = 7;
-            this.btnTomarPosicao.UseVisualStyleBackColor = true;
-            // 
-            // btnZerarMercado
-            // 
-            this.btnZerarMercado.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
-            this.btnZerarMercado.Location = new System.Drawing.Point(286, 57);
-            this.btnZerarMercado.Name = "btnZerarMercado";
-            this.btnZerarMercado.Size = new System.Drawing.Size(32, 32);
-            this.btnZerarMercado.TabIndex = 5;
-            this.btnZerarMercado.UseVisualStyleBackColor = true;
-            // 
-            // btnVendaMercado
-            // 
-            this.btnVendaMercado.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
-            this.btnVendaMercado.Location = new System.Drawing.Point(286, 12);
-            this.btnVendaMercado.Name = "btnVendaMercado";
-            this.btnVendaMercado.Size = new System.Drawing.Size(32, 32);
-            this.btnVendaMercado.TabIndex = 3;
-            this.btnVendaMercado.UseVisualStyleBackColor = true;
-            // 
-            // btnCompraMercado
-            // 
-            this.btnCompraMercado.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
-            this.btnCompraMercado.Location = new System.Drawing.Point(19, 12);
-            this.btnCompraMercado.Name = "btnCompraMercado";
-            this.btnCompraMercado.Size = new System.Drawing.Size(32, 32);
-            this.btnCompraMercado.TabIndex = 1;
-            this.btnCompraMercado.UseVisualStyleBackColor = true;
-            this.btnCompraMercado.Click += new System.EventHandler(this.btnCompraMercado_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,6 +311,10 @@ namespace ProfitChartBot
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnMostrarPosicoes;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -22,10 +22,14 @@ namespace ProfitChartBot
             InitializeComponent();
         }
 
-
         private void btnFechar_Click(object sender, EventArgs e)
         {
             Close();
+        }
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            _configuration = new ProfitChartBotConfiguration();
+
         }
 
         private void btnCompraMercado_Click(object sender, EventArgs e)
@@ -48,9 +52,67 @@ namespace ProfitChartBot
             }
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+
+        private void btnVendaMercado_Click(object sender, EventArgs e)
         {
-            _configuration = new ProfitChartBotConfiguration();
+            var frm = new frmSelecionarRegiao(
+                _configuration.VendaMercadoPosicaoX,
+                _configuration.VendaMercadoPosicaoY,
+                _configuration.VendaMercadoLargura,
+                _configuration.VendaMercadoAltura,
+                "Mire no Botao de Venda Mercado");
+
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _configuration.VendaMercadoMiraPosicaoX = frm.PosicaoMiraX;
+                _configuration.VendaMercadoMiraPosicaoY = frm.PosicaoMiraY;
+                _configuration.VendaMercadoPosicaoX = frm.PosicaoX;
+                _configuration.VendaMercadoPosicaoY = frm.PosicaoY;
+                _configuration.VendaMercadoLargura = frm.LarguraJanela;
+                _configuration.VendaMercadoAltura = frm.AlturaJanela;
+            }
+
+        }
+
+        private void btnTomarPosicao_Click(object sender, EventArgs e)
+        {
+            var frm = new frmSelecionarRegiao(
+                _configuration.IndicadorPosicaoX,
+                _configuration.IndicadorPosicaoY,
+                _configuration.IndicadorLargura,
+                _configuration.IndicadorAltura,
+                "Mire no Indicador");
+
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _configuration.IndicadorMiraPosicaoX = frm.PosicaoMiraX;
+                _configuration.IndicadorMiraPosicaoY = frm.PosicaoMiraY;
+                _configuration.IndicadorPosicaoX = frm.PosicaoX;
+                _configuration.IndicadorPosicaoY = frm.PosicaoY;
+                _configuration.IndicadorLargura = frm.LarguraJanela;
+                _configuration.IndicadorAltura = frm.AlturaJanela;
+            }
+
+        }
+
+        private void btnZerarMercado_Click(object sender, EventArgs e)
+        {
+            var frm = new frmSelecionarRegiao(
+                _configuration.ZerarPosicaoX,
+                _configuration.ZerarPosicaoY,
+                _configuration.ZerarLargura,
+                _configuration.ZerarAltura,
+                "Mire no Indicador");
+
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _configuration.ZerarMiraPosicaoX = frm.PosicaoMiraX;
+                _configuration.ZerarMiraPosicaoY = frm.PosicaoMiraY;
+                _configuration.ZerarPosicaoX = frm.PosicaoX;
+                _configuration.ZerarPosicaoY = frm.PosicaoY;
+                _configuration.ZerarLargura = frm.LarguraJanela;
+                _configuration.ZerarAltura = frm.AlturaJanela;
+            }
 
         }
     }

@@ -55,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BO\ProfitChartBotConfiguration.cs" />
+    <Compile Include="Helpers\ConfigurationHelper.cs" />
+    <Compile Include="Services\Implementation\ConfigurationService.cs" />
+    <Compile Include="Services\IConfigurationService.cs" />
     <Compile Include="UI\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
