@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace ProfitChartBot.Helpers
 {
@@ -62,6 +63,10 @@ namespace ProfitChartBot.Helpers
 
             var inputs = new INPUT[] { inputMouseDown, inputMouseUp };
             SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(INPUT)));
+
+            Thread.Sleep(100);
+
+            Cursor.Position = new Point(1, 1);
 
             /// return mouse 
         }
