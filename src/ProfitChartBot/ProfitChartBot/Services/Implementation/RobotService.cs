@@ -38,6 +38,7 @@ namespace ProfitChartBot.Services.Implementation
                     var comandoParaExecutar = ScreenCaptureHelper.getIndicatorValue(_configuration);
                     if (comandoParaExecutar == ComandoIndicador.Comando.Neutro)
                     {
+                        _ultimoComandoExecutado = comandoParaExecutar;
                         continue;
                     }
                     if (comandoParaExecutar == _ultimoComandoExecutado)
@@ -57,7 +58,7 @@ namespace ProfitChartBot.Services.Implementation
                     }
                     if (comandoParaExecutar == ComandoIndicador.Comando.Zerar)
                     {
-                        SendClickHelper.ClickOnPoint(_configuration.PointForComprar());
+                        SendClickHelper.ClickOnPoint(_configuration.PointForZerar());
 
                     }
 
