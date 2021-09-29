@@ -55,14 +55,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BO\ProfitChartBotConfiguration.cs" />
+    <Compile Include="Enums\ComandoIndicador.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
+    <Compile Include="Helpers\ScreenCaptureHelper.cs" />
+    <Compile Include="Helpers\SencClickHelper.cs" />
     <Compile Include="Services\Implementation\ConfigurationService.cs" />
     <Compile Include="Services\IConfigurationService.cs" />
+    <Compile Include="Services\Implementation\RobotService.cs" />
+    <Compile Include="Services\IRobotService.cs" />
     <Compile Include="UI\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmMostrarRegiao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMostrarRegiao.Designer.cs">
+      <DependentUpon>frmMostrarRegiao.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\frmSelecionarRegiao.cs">
       <SubType>Form</SubType>
@@ -74,6 +85,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="UI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmMostrarRegiao.resx">
+      <DependentUpon>frmMostrarRegiao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmSelecionarRegiao.resx">
       <DependentUpon>frmSelecionarRegiao.cs</DependentUpon>

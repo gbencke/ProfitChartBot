@@ -12,5 +12,7 @@ namespace ProfitChartBot.Services
         void saveConfiguration(ProfitChartBotConfiguration _toSave);
 
         ProfitChartBotConfiguration getConfiguration();
+
+        ProfitChartBotConfiguration clearConfiguration();
     }
 }

@@ -32,24 +32,25 @@ namespace ProfitChartBot
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabConfiguracao = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.btnValorPosicaoAberta = new System.Windows.Forms.Button();
+            this.lblValorPosicaoAberta = new System.Windows.Forms.Label();
+            this.btnNumeroContratosAbertos = new System.Windows.Forms.Button();
+            this.lblNumeroDeContratos = new System.Windows.Forms.Label();
+            this.lblMostrarPosicoesNaTela = new System.Windows.Forms.Label();
             this.btnMostrarPosicoes = new System.Windows.Forms.Button();
             this.btnTomarPosicao = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblIndicadorParaTomarPosicao = new System.Windows.Forms.Label();
             this.btnZerarMercado = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblBotaoZerarPosicao = new System.Windows.Forms.Label();
             this.btnVendaMercado = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblBotaoVendaMercado = new System.Windows.Forms.Label();
             this.btnCompraMercado = new System.Windows.Forms.Button();
             this.lblBotaoCompraMercado = new System.Windows.Forms.Label();
             this.tabLog = new System.Windows.Forms.TabPage();
             this.listView1 = new System.Windows.Forms.ListView();
             this.btnFechar = new System.Windows.Forms.Button();
             this.btnIniciar = new System.Windows.Forms.Button();
+            this.btnLimparConfiguracao = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabConfiguracao.SuspendLayout();
             this.tabLog.SuspendLayout();
@@ -68,18 +69,18 @@ namespace ProfitChartBot
             // 
             // tabConfiguracao
             // 
-            this.tabConfiguracao.Controls.Add(this.button1);
-            this.tabConfiguracao.Controls.Add(this.label5);
-            this.tabConfiguracao.Controls.Add(this.button2);
-            this.tabConfiguracao.Controls.Add(this.label6);
-            this.tabConfiguracao.Controls.Add(this.label4);
+            this.tabConfiguracao.Controls.Add(this.btnValorPosicaoAberta);
+            this.tabConfiguracao.Controls.Add(this.lblValorPosicaoAberta);
+            this.tabConfiguracao.Controls.Add(this.btnNumeroContratosAbertos);
+            this.tabConfiguracao.Controls.Add(this.lblNumeroDeContratos);
+            this.tabConfiguracao.Controls.Add(this.lblMostrarPosicoesNaTela);
             this.tabConfiguracao.Controls.Add(this.btnMostrarPosicoes);
             this.tabConfiguracao.Controls.Add(this.btnTomarPosicao);
-            this.tabConfiguracao.Controls.Add(this.label3);
+            this.tabConfiguracao.Controls.Add(this.lblIndicadorParaTomarPosicao);
             this.tabConfiguracao.Controls.Add(this.btnZerarMercado);
-            this.tabConfiguracao.Controls.Add(this.label2);
+            this.tabConfiguracao.Controls.Add(this.lblBotaoZerarPosicao);
             this.tabConfiguracao.Controls.Add(this.btnVendaMercado);
-            this.tabConfiguracao.Controls.Add(this.label1);
+            this.tabConfiguracao.Controls.Add(this.lblBotaoVendaMercado);
             this.tabConfiguracao.Controls.Add(this.btnCompraMercado);
             this.tabConfiguracao.Controls.Add(this.lblBotaoCompraMercado);
             this.tabConfiguracao.Location = new System.Drawing.Point(4, 29);
@@ -90,53 +91,55 @@ namespace ProfitChartBot
             this.tabConfiguracao.Text = "Configuracao";
             this.tabConfiguracao.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnValorPosicaoAberta
             // 
-            this.button1.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
-            this.button1.Location = new System.Drawing.Point(19, 108);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 32);
-            this.button1.TabIndex = 13;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnValorPosicaoAberta.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
+            this.btnValorPosicaoAberta.Location = new System.Drawing.Point(19, 108);
+            this.btnValorPosicaoAberta.Name = "btnValorPosicaoAberta";
+            this.btnValorPosicaoAberta.Size = new System.Drawing.Size(32, 32);
+            this.btnValorPosicaoAberta.TabIndex = 13;
+            this.btnValorPosicaoAberta.UseVisualStyleBackColor = true;
+            this.btnValorPosicaoAberta.Click += new System.EventHandler(this.btnValorPosicaoAberta_Click);
             // 
-            // label5
+            // lblValorPosicaoAberta
             // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(57, 114);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(213, 20);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Valor em R$, Posicao Aberta";
+            this.lblValorPosicaoAberta.AutoSize = true;
+            this.lblValorPosicaoAberta.ForeColor = System.Drawing.Color.Red;
+            this.lblValorPosicaoAberta.Location = new System.Drawing.Point(57, 114);
+            this.lblValorPosicaoAberta.Name = "lblValorPosicaoAberta";
+            this.lblValorPosicaoAberta.Size = new System.Drawing.Size(213, 20);
+            this.lblValorPosicaoAberta.TabIndex = 12;
+            this.lblValorPosicaoAberta.Text = "Valor em R$, Posicao Aberta";
             // 
-            // button2
+            // btnNumeroContratosAbertos
             // 
-            this.button2.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
-            this.button2.Location = new System.Drawing.Point(286, 108);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(32, 32);
-            this.button2.TabIndex = 11;
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnNumeroContratosAbertos.Image = global::ProfitChartBot.Properties.Resources.crosshair_icon_173899;
+            this.btnNumeroContratosAbertos.Location = new System.Drawing.Point(286, 108);
+            this.btnNumeroContratosAbertos.Name = "btnNumeroContratosAbertos";
+            this.btnNumeroContratosAbertos.Size = new System.Drawing.Size(32, 32);
+            this.btnNumeroContratosAbertos.TabIndex = 11;
+            this.btnNumeroContratosAbertos.UseVisualStyleBackColor = true;
+            this.btnNumeroContratosAbertos.Click += new System.EventHandler(this.btnNumeroContratosAbertos_Click);
             // 
-            // label6
+            // lblNumeroDeContratos
             // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(324, 114);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(221, 20);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Numero de Contratos Abertos";
+            this.lblNumeroDeContratos.AutoSize = true;
+            this.lblNumeroDeContratos.ForeColor = System.Drawing.Color.Red;
+            this.lblNumeroDeContratos.Location = new System.Drawing.Point(324, 114);
+            this.lblNumeroDeContratos.Name = "lblNumeroDeContratos";
+            this.lblNumeroDeContratos.Size = new System.Drawing.Size(221, 20);
+            this.lblNumeroDeContratos.TabIndex = 10;
+            this.lblNumeroDeContratos.Text = "Numero de Contratos Abertos";
             // 
-            // label4
+            // lblMostrarPosicoesNaTela
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(57, 161);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(187, 20);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Mostrar Posicoes na Tela";
+            this.lblMostrarPosicoesNaTela.AutoSize = true;
+            this.lblMostrarPosicoesNaTela.ForeColor = System.Drawing.Color.Black;
+            this.lblMostrarPosicoesNaTela.Location = new System.Drawing.Point(57, 161);
+            this.lblMostrarPosicoesNaTela.Name = "lblMostrarPosicoesNaTela";
+            this.lblMostrarPosicoesNaTela.Size = new System.Drawing.Size(187, 20);
+            this.lblMostrarPosicoesNaTela.TabIndex = 9;
+            this.lblMostrarPosicoesNaTela.Text = "Mostrar Posicoes na Tela";
             // 
             // btnMostrarPosicoes
             // 
@@ -146,6 +149,7 @@ namespace ProfitChartBot
             this.btnMostrarPosicoes.Size = new System.Drawing.Size(32, 32);
             this.btnMostrarPosicoes.TabIndex = 8;
             this.btnMostrarPosicoes.UseVisualStyleBackColor = true;
+            this.btnMostrarPosicoes.Click += new System.EventHandler(this.btnMostrarPosicoes_Click);
             // 
             // btnTomarPosicao
             // 
@@ -157,15 +161,15 @@ namespace ProfitChartBot
             this.btnTomarPosicao.UseVisualStyleBackColor = true;
             this.btnTomarPosicao.Click += new System.EventHandler(this.btnTomarPosicao_Click);
             // 
-            // label3
+            // lblIndicadorParaTomarPosicao
             // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(57, 63);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(220, 20);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Indicador para Tomar Posicao";
+            this.lblIndicadorParaTomarPosicao.AutoSize = true;
+            this.lblIndicadorParaTomarPosicao.ForeColor = System.Drawing.Color.Red;
+            this.lblIndicadorParaTomarPosicao.Location = new System.Drawing.Point(57, 63);
+            this.lblIndicadorParaTomarPosicao.Name = "lblIndicadorParaTomarPosicao";
+            this.lblIndicadorParaTomarPosicao.Size = new System.Drawing.Size(220, 20);
+            this.lblIndicadorParaTomarPosicao.TabIndex = 6;
+            this.lblIndicadorParaTomarPosicao.Text = "Indicador para Tomar Posicao";
             // 
             // btnZerarMercado
             // 
@@ -177,15 +181,15 @@ namespace ProfitChartBot
             this.btnZerarMercado.UseVisualStyleBackColor = true;
             this.btnZerarMercado.Click += new System.EventHandler(this.btnZerarMercado_Click);
             // 
-            // label2
+            // lblBotaoZerarPosicao
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(324, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(176, 20);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Botao de Zerar Posicao";
+            this.lblBotaoZerarPosicao.AutoSize = true;
+            this.lblBotaoZerarPosicao.ForeColor = System.Drawing.Color.Red;
+            this.lblBotaoZerarPosicao.Location = new System.Drawing.Point(324, 63);
+            this.lblBotaoZerarPosicao.Name = "lblBotaoZerarPosicao";
+            this.lblBotaoZerarPosicao.Size = new System.Drawing.Size(176, 20);
+            this.lblBotaoZerarPosicao.TabIndex = 4;
+            this.lblBotaoZerarPosicao.Text = "Botao de Zerar Posicao";
             // 
             // btnVendaMercado
             // 
@@ -197,15 +201,15 @@ namespace ProfitChartBot
             this.btnVendaMercado.UseVisualStyleBackColor = true;
             this.btnVendaMercado.Click += new System.EventHandler(this.btnVendaMercado_Click);
             // 
-            // label1
+            // lblBotaoVendaMercado
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(324, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(191, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Botao de Venda Mercado";
+            this.lblBotaoVendaMercado.AutoSize = true;
+            this.lblBotaoVendaMercado.ForeColor = System.Drawing.Color.Red;
+            this.lblBotaoVendaMercado.Location = new System.Drawing.Point(324, 18);
+            this.lblBotaoVendaMercado.Name = "lblBotaoVendaMercado";
+            this.lblBotaoVendaMercado.Size = new System.Drawing.Size(191, 20);
+            this.lblBotaoVendaMercado.TabIndex = 2;
+            this.lblBotaoVendaMercado.Text = "Botao de Venda Mercado";
             // 
             // btnCompraMercado
             // 
@@ -263,6 +267,7 @@ namespace ProfitChartBot
             // 
             // btnIniciar
             // 
+            this.btnIniciar.Enabled = false;
             this.btnIniciar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciar.Location = new System.Drawing.Point(489, 410);
             this.btnIniciar.Name = "btnIniciar";
@@ -270,12 +275,25 @@ namespace ProfitChartBot
             this.btnIniciar.TabIndex = 2;
             this.btnIniciar.Text = "Iniciar";
             this.btnIniciar.UseVisualStyleBackColor = true;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
+            // 
+            // btnLimparConfiguracao
+            // 
+            this.btnLimparConfiguracao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimparConfiguracao.Location = new System.Drawing.Point(16, 411);
+            this.btnLimparConfiguracao.Name = "btnLimparConfiguracao";
+            this.btnLimparConfiguracao.Size = new System.Drawing.Size(185, 37);
+            this.btnLimparConfiguracao.TabIndex = 3;
+            this.btnLimparConfiguracao.Text = "Limpar Configuracao";
+            this.btnLimparConfiguracao.UseVisualStyleBackColor = true;
+            this.btnLimparConfiguracao.Click += new System.EventHandler(this.btnLimparConfiguracao_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 460);
+            this.Controls.Add(this.btnLimparConfiguracao);
             this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.btnFechar);
             this.Controls.Add(this.tabControl1);
@@ -303,18 +321,19 @@ namespace ProfitChartBot
         private System.Windows.Forms.Label lblBotaoCompraMercado;
         private System.Windows.Forms.Button btnCompraMercado;
         private System.Windows.Forms.Button btnTomarPosicao;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblIndicadorParaTomarPosicao;
         private System.Windows.Forms.Button btnZerarMercado;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblBotaoZerarPosicao;
         private System.Windows.Forms.Button btnVendaMercado;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblBotaoVendaMercado;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblMostrarPosicoesNaTela;
         private System.Windows.Forms.Button btnMostrarPosicoes;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnValorPosicaoAberta;
+        private System.Windows.Forms.Label lblValorPosicaoAberta;
+        private System.Windows.Forms.Button btnNumeroContratosAbertos;
+        private System.Windows.Forms.Label lblNumeroDeContratos;
+        private System.Windows.Forms.Button btnLimparConfiguracao;
     }
 }
 

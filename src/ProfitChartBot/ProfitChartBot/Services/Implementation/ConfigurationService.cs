@@ -27,6 +27,12 @@ namespace ProfitChartBot.Services
             return new ProfitChartBotConfiguration();
         }
 
+        ProfitChartBotConfiguration IConfigurationService.clearConfiguration()
+        {
+            File.Delete(_configurationFile);
+            return new ProfitChartBotConfiguration();
+        }
+
         void IConfigurationService.saveConfiguration(ProfitChartBotConfiguration _toSave)
         {
             File.WriteAllText(_configurationFile, JsonConvert.SerializeObject(_toSave));

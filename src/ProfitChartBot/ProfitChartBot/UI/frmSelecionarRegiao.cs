@@ -103,8 +103,8 @@ namespace ProfitChartBot
                 _posicaoX = this.Left;
                 _posicaoY = this.Top;
 
-                _posicaoMiraX = 5 + _larguraMira + 1 + _posicaoX.Value;
-                _posicaoMiraY = 5 + _alturaMira + 1 + _posicaoY.Value;
+                _posicaoMiraX = 5 + _larguraMira + 1 + _posicaoX.Value + 5;
+                _posicaoMiraY = 5 + _alturaMira + 1 + _posicaoY.Value + 30;
 
                 lblPosicao.Text = String.Format("{0}x{1}", _posicaoMiraX, _posicaoMiraY);
             }
