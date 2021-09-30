@@ -301,7 +301,8 @@ namespace ProfitChartBot
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ProfitChartPro";
+            this.Text = "ProfitChartProBot";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabConfiguracao.ResumeLayout(false);
