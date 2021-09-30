@@ -23,24 +23,28 @@ namespace ProfitChartBot.Helpers
             var PosicaoInternaX = _configuration.IndicadorLargura.Value / 2;
             var PosicaoInternaY = _configuration.IndicadorAltura.Value / 2;
 
-            Bitmap bmp = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb);
-            Graphics g = Graphics.FromImage(bmp);
-            g.CopyFromScreen(rect.Left, rect.Top, 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
-            Color pixel = bmp.GetPixel(PosicaoInternaX, PosicaoInternaY);
-            if (pixel.R > 180 && pixel.G > 180 && pixel.B < 180)
-            {
-                return ComandoIndicador.Comando.Zerar;
-            }
-            if (pixel.R == 204 && pixel.G == 48 && pixel.B == 48)
-            {
-                return ComandoIndicador.Comando.Vender;
-            }
-            if (pixel.R == 17 && pixel.G == 152 && pixel.B == 80)
-            {
-                return ComandoIndicador.Comando.Comprar;
-            }
+            using (Bitmap bmp = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb)) {
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    g.CopyFromScreen(rect.Left, rect.Top, 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
+                    Color pixel = bmp.GetPixel(PosicaoInternaX, PosicaoInternaY);
 
-            return ComandoIndicador.Comando.Neutro;
+                    if (pixel.R > 180 && pixel.G > 180 && pixel.B < 180)
+                    {
+                        return ComandoIndicador.Comando.Zerar;
+                    }
+                    if (pixel.R == 204 && pixel.G == 48 && pixel.B == 48)
+                    {
+                        return ComandoIndicador.Comando.Vender;
+                    }
+                    if (pixel.R == 17 && pixel.G == 152 && pixel.B == 80)
+                    {
+                        return ComandoIndicador.Comando.Comprar;
+                    }
+
+                    return ComandoIndicador.Comando.Neutro;
+                }
+            }
         }
     }
 }
