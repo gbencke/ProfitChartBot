@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitChartBotMLBased", "ProfitChartBotMLBased\ProfitChartBotMLBased.csproj", "{DC23A4D7-7446-4628-A7BA-2174C875132A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitChartBotScanner", "ProfitChartBotScanner\ProfitChartBotScanner.csproj", "{29BEFD96-E869-4220-B6E2-868FE9627449}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC23A4D7-7446-4628-A7BA-2174C875132A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC23A4D7-7446-4628-A7BA-2174C875132A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC23A4D7-7446-4628-A7BA-2174C875132A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC23A4D7-7446-4628-A7BA-2174C875132A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29BEFD96-E869-4220-B6E2-868FE9627449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29BEFD96-E869-4220-B6E2-868FE9627449}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29BEFD96-E869-4220-B6E2-868FE9627449}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29BEFD96-E869-4220-B6E2-868FE9627449}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ADCDB705-ABB1-43D3-9039-DF15460B99D3}
+	EndGlobalSection
+EndGlobal
