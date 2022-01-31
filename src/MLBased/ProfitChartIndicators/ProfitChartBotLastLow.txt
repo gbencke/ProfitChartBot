@@ -1,0 +1,4 @@
+begin
+    SetPlotColor(1, clBlack);
+    Plot(Low[1]); 
+end;
