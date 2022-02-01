@@ -53,6 +53,9 @@ namespace ProfitChartBotMLBased
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnClosePositions = new System.Windows.Forms.Button();
+            this.txtClosePositions = new System.Windows.Forms.TextBox();
+            this.lblClosePositions = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblIndicatorsRegion
@@ -129,6 +132,7 @@ namespace ProfitChartBotMLBased
             this.btnLongPosition.TabIndex = 7;
             this.btnLongPosition.Text = "...";
             this.btnLongPosition.UseVisualStyleBackColor = true;
+            this.btnLongPosition.Click += new System.EventHandler(this.btnLongPosition_Click);
             // 
             // btnShortPosition
             // 
@@ -139,12 +143,13 @@ namespace ProfitChartBotMLBased
             this.btnShortPosition.TabIndex = 8;
             this.btnShortPosition.Text = "...";
             this.btnShortPosition.UseVisualStyleBackColor = true;
+            this.btnShortPosition.Click += new System.EventHandler(this.btnShortPosition_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 141);
+            this.label1.Location = new System.Drawing.Point(12, 180);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 20);
             this.label1.TabIndex = 9;
@@ -154,7 +159,7 @@ namespace ProfitChartBotMLBased
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 178);
+            this.label2.Location = new System.Drawing.Point(12, 217);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(162, 20);
             this.label2.TabIndex = 10;
@@ -164,7 +169,7 @@ namespace ProfitChartBotMLBased
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 220);
+            this.label3.Location = new System.Drawing.Point(12, 259);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(188, 20);
             this.label3.TabIndex = 11;
@@ -174,7 +179,7 @@ namespace ProfitChartBotMLBased
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 254);
+            this.label4.Location = new System.Drawing.Point(12, 293);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(155, 20);
             this.label4.TabIndex = 12;
@@ -184,7 +189,7 @@ namespace ProfitChartBotMLBased
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 292);
+            this.label5.Location = new System.Drawing.Point(12, 331);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(176, 20);
             this.label5.TabIndex = 13;
@@ -193,7 +198,7 @@ namespace ProfitChartBotMLBased
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(205, 138);
+            this.textBox1.Location = new System.Drawing.Point(205, 177);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(348, 26);
             this.textBox1.TabIndex = 14;
@@ -201,7 +206,7 @@ namespace ProfitChartBotMLBased
             // btnTesseractExecutable
             // 
             this.btnTesseractExecutable.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTesseractExecutable.Location = new System.Drawing.Point(559, 137);
+            this.btnTesseractExecutable.Location = new System.Drawing.Point(559, 176);
             this.btnTesseractExecutable.Name = "btnTesseractExecutable";
             this.btnTesseractExecutable.Size = new System.Drawing.Size(39, 30);
             this.btnTesseractExecutable.TabIndex = 15;
@@ -211,7 +216,7 @@ namespace ProfitChartBotMLBased
             // btnTessdataLocation
             // 
             this.btnTessdataLocation.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTessdataLocation.Location = new System.Drawing.Point(559, 177);
+            this.btnTessdataLocation.Location = new System.Drawing.Point(559, 216);
             this.btnTessdataLocation.Name = "btnTessdataLocation";
             this.btnTessdataLocation.Size = new System.Drawing.Size(39, 30);
             this.btnTessdataLocation.TabIndex = 17;
@@ -221,7 +226,7 @@ namespace ProfitChartBotMLBased
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(205, 178);
+            this.textBox2.Location = new System.Drawing.Point(205, 217);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(348, 26);
             this.textBox2.TabIndex = 16;
@@ -229,7 +234,7 @@ namespace ProfitChartBotMLBased
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(205, 217);
+            this.textBox3.Location = new System.Drawing.Point(205, 256);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(348, 26);
             this.textBox3.TabIndex = 18;
@@ -237,7 +242,7 @@ namespace ProfitChartBotMLBased
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(205, 251);
+            this.textBox4.Location = new System.Drawing.Point(205, 290);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(348, 26);
             this.textBox4.TabIndex = 19;
@@ -245,7 +250,7 @@ namespace ProfitChartBotMLBased
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(205, 292);
+            this.textBox5.Location = new System.Drawing.Point(205, 331);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(348, 26);
             this.textBox5.TabIndex = 20;
@@ -253,7 +258,7 @@ namespace ProfitChartBotMLBased
             // btnCancelar
             // 
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(378, 375);
+            this.btnCancelar.Location = new System.Drawing.Point(378, 395);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(101, 44);
             this.btnCancelar.TabIndex = 21;
@@ -264,7 +269,7 @@ namespace ProfitChartBotMLBased
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(497, 375);
+            this.btnOK.Location = new System.Drawing.Point(497, 395);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(101, 44);
             this.btnOK.TabIndex = 22;
@@ -272,11 +277,43 @@ namespace ProfitChartBotMLBased
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.button7_Click);
             // 
+            // btnClosePositions
+            // 
+            this.btnClosePositions.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClosePositions.Location = new System.Drawing.Point(559, 134);
+            this.btnClosePositions.Name = "btnClosePositions";
+            this.btnClosePositions.Size = new System.Drawing.Size(39, 30);
+            this.btnClosePositions.TabIndex = 25;
+            this.btnClosePositions.Text = "...";
+            this.btnClosePositions.UseVisualStyleBackColor = true;
+            this.btnClosePositions.Click += new System.EventHandler(this.btnClosePositions_Click);
+            // 
+            // txtClosePositions
+            // 
+            this.txtClosePositions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtClosePositions.Location = new System.Drawing.Point(205, 135);
+            this.txtClosePositions.Name = "txtClosePositions";
+            this.txtClosePositions.Size = new System.Drawing.Size(351, 26);
+            this.txtClosePositions.TabIndex = 24;
+            // 
+            // lblClosePositions
+            // 
+            this.lblClosePositions.AutoSize = true;
+            this.lblClosePositions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClosePositions.Location = new System.Drawing.Point(12, 138);
+            this.lblClosePositions.Name = "lblClosePositions";
+            this.lblClosePositions.Size = new System.Drawing.Size(137, 20);
+            this.lblClosePositions.TabIndex = 23;
+            this.lblClosePositions.Text = "Close Positions:";
+            // 
             // frmConfigure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 431);
+            this.ClientSize = new System.Drawing.Size(608, 452);
+            this.Controls.Add(this.btnClosePositions);
+            this.Controls.Add(this.txtClosePositions);
+            this.Controls.Add(this.lblClosePositions);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.textBox5);
@@ -307,6 +344,7 @@ namespace ProfitChartBotMLBased
             this.Name = "frmConfigure";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bot Configuration";
+            this.Load += new System.EventHandler(this.frmConfigure_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,5 +375,8 @@ namespace ProfitChartBotMLBased
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnClosePositions;
+        private System.Windows.Forms.TextBox txtClosePositions;
+        private System.Windows.Forms.Label lblClosePositions;
     }
 }

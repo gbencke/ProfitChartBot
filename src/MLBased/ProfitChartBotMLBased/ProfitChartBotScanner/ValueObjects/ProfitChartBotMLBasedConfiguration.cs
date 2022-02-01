@@ -23,6 +23,7 @@ namespace ProfitChartBotScanner
 
         public ScreenPoint StartLongPosition { get; set; }
         public ScreenPoint StartShortPosition { get; set; }
+        public ScreenPoint ClosePositions { get; set; }
         public String TesseractExecutable { get; set; }
         public String TesseractLocation { get; set; }
         public String GETParametersURL { get; set; }

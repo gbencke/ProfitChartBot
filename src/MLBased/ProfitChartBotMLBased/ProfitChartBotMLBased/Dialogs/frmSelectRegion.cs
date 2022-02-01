@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
+using ProfitChartBotScanner;
 
 namespace ProfitChartBotMLBased
 {
@@ -24,12 +26,58 @@ namespace ProfitChartBotMLBased
         private bool _finishedLoading = false;
         private bool _RegionSelectMode;
 
-        public int PositionX { get { return _positionX.Value; } }
-        public int PositionY { get { return _positionY.Value; } }
-        public int WindowWidth { get { return _windowWidth.Value; } } 
-        public int WindowHeight {  get { return _windowHeigth.Value; } }
-        public int PositionSigthX { get { return _positionSightX; } }
-        public int PositionSightY { get { return _positionSightY; } }
+        private ScreenRectangle _ResultingRectangle = null;
+        private ScreenPoint _ResultingPoint = null;
+
+        private int PositionX { get { return _positionX.Value; } }
+        private int PositionY { get { return _positionY.Value; } }
+        private int WindowWidth { get { return _windowWidth.Value; } }
+        private int WindowHeight { get { return _windowHeigth.Value; } }
+        private int PositionSigthX { get { return _positionSightX; } }
+        private int PositionSightY { get { return _positionSightY; } }
+        private int RectLeft
+        {
+            get
+            {
+                return Left + 15;
+            }
+        }
+        private int RectTop
+        {
+            get
+            {
+                return Top + 55;
+            }
+        }
+        private int RectWidth
+        {
+            get
+            {
+                return Width - 35;
+            }
+        }
+        private int RectHeight
+        {
+            get
+            {
+                return Height - 120;
+            }
+        }
+
+        public ScreenRectangle ResultingRectangle
+        {
+            get
+            {
+                return _ResultingRectangle;
+            }
+        }
+        public ScreenPoint ResultingPoint
+        {
+            get
+            {
+                return _ResultingPoint;
+            }
+        }
 
         public frmSelectRegion(
             int? X,
@@ -64,32 +112,45 @@ namespace ProfitChartBotMLBased
 
         private void frmSelecionarRegiao_Paint(object sender, PaintEventArgs e)
         {
+            int ActiveWidth = this.Width - 30;
+            int ActiveHeight = this.Height - 100;
 
             SolidBrush transparentBrush = new SolidBrush(Color.FromArgb(255, 255, 0));
 
-            _widthSight = (this.Width - 30) / 2;
-            _heightSight = (this.Height - 100) / 2;
+            _widthSight = (ActiveWidth) / 2;
+            _heightSight = (ActiveHeight) / 2;
 
-            e.Graphics.FillRectangle(transparentBrush, new Rectangle(
-                5,
-                5,
-                _widthSight - 1,
-                _heightSight - 1));
-            e.Graphics.FillRectangle(transparentBrush, new Rectangle(
-                5 + _widthSight + 1,
-                5,
-                _widthSight - 1,
-                _heightSight - 1));
-            e.Graphics.FillRectangle(transparentBrush, new Rectangle(
-                5,
-                5 + _heightSight + 1,
-                _widthSight - 1,
-                _heightSight - 1));
-            e.Graphics.FillRectangle(transparentBrush, new Rectangle(
-                5 + _widthSight + 1,
-                5 + _heightSight + 1,
-                _widthSight - 1,
-                _heightSight - 1));
+            if (!_RegionSelectMode)
+            {
+                e.Graphics.FillRectangle(transparentBrush, new Rectangle(
+                    5,
+                    5,
+                    _widthSight - 1,
+                    _heightSight - 1));
+                e.Graphics.FillRectangle(transparentBrush, new Rectangle(
+                    5 + _widthSight + 1,
+                    5,
+                    _widthSight - 1,
+                    _heightSight - 1));
+                e.Graphics.FillRectangle(transparentBrush, new Rectangle(
+                    5,
+                    5 + _heightSight + 1,
+                    _widthSight - 1,
+                    _heightSight - 1));
+                e.Graphics.FillRectangle(transparentBrush, new Rectangle(
+                    5 + _widthSight + 1,
+                    5 + _heightSight + 1,
+                    _widthSight - 1,
+                    _heightSight - 1));
+            }
+            else
+            {
+                e.Graphics.FillRectangle(transparentBrush, new Rectangle(
+                    5,
+                    5,
+                    ActiveWidth,
+                    ActiveHeight));
+            }
 
         }
 
@@ -109,9 +170,17 @@ namespace ProfitChartBotMLBased
                 _positionSightX = 5 + _widthSight + 1 + _positionX.Value + 5;
                 _positionSightY = 5 + _heightSight + 1 + _positionY.Value + 30;
 
-                lblPosicao.Text = String.Format("{0}x{1}", _positionSightX, _positionSightY);
+                if (!_RegionSelectMode)
+                {
+                    lblPosicao.Text = String.Format("{0}x{1}", _positionSightX, _positionSightY);
+                }
+                else
+                {
+                    lblPosicao.Text = String.Format("{0}x{1}x{2}x{3}", RectLeft, RectTop, RectWidth, RectHeight);
+                }
             }
         }
+
 
         private void frmSelecionarRegiao_Resize(object sender, EventArgs e)
         {
@@ -151,10 +220,32 @@ namespace ProfitChartBotMLBased
             ReposicionarBotao();
         }
 
+
+
+
         private void btnSelecionar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-        }
+            if (_RegionSelectMode)
+            {
+                _ResultingRectangle = new ScreenRectangle(RectLeft, RectTop, RectWidth, RectHeight);
+            }
+            else
+            {
+                _ResultingPoint = new ScreenPoint(_positionSightX, _positionSightY);
+                /* Rectangle rect = new Rectangle( _positionSightX - 20, _positionSightY - 20, 40, 40);
 
+                using (Bitmap bmp = new Bitmap(rect.Width, rect.Height, PixelFormat.Format32bppArgb)) {
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        g.CopyFromScreen(rect.Left, rect.Top, 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
+                        bmp.Save("C:\\tmp\\teste.jpg", ImageFormat.Jpeg);
+                    }
+                }
+                */
+            }
+
+            DialogResult = DialogResult.OK;
+
+        }
     }
 }

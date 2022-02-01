@@ -27,5 +27,10 @@ namespace ProfitChartBotMLBased
             var frm = new frmConfigure(new ProfitChartBotScanner.ProfitChartBotMLBasedConfiguration());
             var result = frm.ShowDialog();
         }
+
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
