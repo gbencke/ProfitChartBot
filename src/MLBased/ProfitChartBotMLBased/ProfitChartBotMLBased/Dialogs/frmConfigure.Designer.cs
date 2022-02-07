@@ -44,18 +44,26 @@ namespace ProfitChartBotMLBased
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTesseractExecutable = new System.Windows.Forms.TextBox();
             this.btnTesseractExecutable = new System.Windows.Forms.Button();
             this.btnTessdataLocation = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtTessDataLocation = new System.Windows.Forms.TextBox();
+            this.txtGETParametersURL = new System.Windows.Forms.TextBox();
+            this.txtPOSTQuoteURL = new System.Windows.Forms.TextBox();
+            this.txtGETPredictionURL = new System.Windows.Forms.TextBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnClosePositions = new System.Windows.Forms.Button();
             this.txtClosePositions = new System.Windows.Forms.TextBox();
             this.lblClosePositions = new System.Windows.Forms.Label();
+            this.txtTextLogDir = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtImageLogDir = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.searchTesseractEXE = new System.Windows.Forms.OpenFileDialog();
+            this.searchTessdataFolder = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnTextLogDirLocation = new System.Windows.Forms.Button();
+            this.btnImageLogDir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblIndicatorsRegion
@@ -93,6 +101,7 @@ namespace ProfitChartBotMLBased
             this.txtIndicatorsRegion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtIndicatorsRegion.Location = new System.Drawing.Point(205, 11);
             this.txtIndicatorsRegion.Name = "txtIndicatorsRegion";
+            this.txtIndicatorsRegion.ReadOnly = true;
             this.txtIndicatorsRegion.Size = new System.Drawing.Size(351, 26);
             this.txtIndicatorsRegion.TabIndex = 3;
             // 
@@ -101,6 +110,7 @@ namespace ProfitChartBotMLBased
             this.txtLongPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLongPosition.Location = new System.Drawing.Point(205, 51);
             this.txtLongPosition.Name = "txtLongPosition";
+            this.txtLongPosition.ReadOnly = true;
             this.txtLongPosition.Size = new System.Drawing.Size(351, 26);
             this.txtLongPosition.TabIndex = 4;
             // 
@@ -109,6 +119,7 @@ namespace ProfitChartBotMLBased
             this.txtShortPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtShortPosition.Location = new System.Drawing.Point(205, 93);
             this.txtShortPosition.Name = "txtShortPosition";
+            this.txtShortPosition.ReadOnly = true;
             this.txtShortPosition.Size = new System.Drawing.Size(351, 26);
             this.txtShortPosition.TabIndex = 5;
             // 
@@ -179,7 +190,7 @@ namespace ProfitChartBotMLBased
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 293);
+            this.label4.Location = new System.Drawing.Point(12, 298);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(155, 20);
             this.label4.TabIndex = 12;
@@ -189,19 +200,20 @@ namespace ProfitChartBotMLBased
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 331);
+            this.label5.Location = new System.Drawing.Point(12, 336);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(176, 20);
             this.label5.TabIndex = 13;
             this.label5.Text = "GET Prediction URL:";
             // 
-            // textBox1
+            // txtTesseractExecutable
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(205, 177);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(348, 26);
-            this.textBox1.TabIndex = 14;
+            this.txtTesseractExecutable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTesseractExecutable.Location = new System.Drawing.Point(205, 177);
+            this.txtTesseractExecutable.Name = "txtTesseractExecutable";
+            this.txtTesseractExecutable.ReadOnly = true;
+            this.txtTesseractExecutable.Size = new System.Drawing.Size(348, 26);
+            this.txtTesseractExecutable.TabIndex = 14;
             // 
             // btnTesseractExecutable
             // 
@@ -212,6 +224,7 @@ namespace ProfitChartBotMLBased
             this.btnTesseractExecutable.TabIndex = 15;
             this.btnTesseractExecutable.Text = "...";
             this.btnTesseractExecutable.UseVisualStyleBackColor = true;
+            this.btnTesseractExecutable.Click += new System.EventHandler(this.btnTesseractExecutable_Click);
             // 
             // btnTessdataLocation
             // 
@@ -222,45 +235,50 @@ namespace ProfitChartBotMLBased
             this.btnTessdataLocation.TabIndex = 17;
             this.btnTessdataLocation.Text = "...";
             this.btnTessdataLocation.UseVisualStyleBackColor = true;
+            this.btnTessdataLocation.Click += new System.EventHandler(this.btnTessdataLocation_Click);
             // 
-            // textBox2
+            // txtTessDataLocation
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(205, 217);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(348, 26);
-            this.textBox2.TabIndex = 16;
+            this.txtTessDataLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTessDataLocation.Location = new System.Drawing.Point(205, 217);
+            this.txtTessDataLocation.Name = "txtTessDataLocation";
+            this.txtTessDataLocation.ReadOnly = true;
+            this.txtTessDataLocation.Size = new System.Drawing.Size(348, 26);
+            this.txtTessDataLocation.TabIndex = 16;
             // 
-            // textBox3
+            // txtGETParametersURL
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(205, 256);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(348, 26);
-            this.textBox3.TabIndex = 18;
+            this.txtGETParametersURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGETParametersURL.Location = new System.Drawing.Point(205, 256);
+            this.txtGETParametersURL.Name = "txtGETParametersURL";
+            this.txtGETParametersURL.Size = new System.Drawing.Size(348, 26);
+            this.txtGETParametersURL.TabIndex = 18;
+            this.txtGETParametersURL.TextChanged += new System.EventHandler(this.txtGETParametersURL_TextChanged);
             // 
-            // textBox4
+            // txtPOSTQuoteURL
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(205, 290);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(348, 26);
-            this.textBox4.TabIndex = 19;
+            this.txtPOSTQuoteURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPOSTQuoteURL.Location = new System.Drawing.Point(205, 295);
+            this.txtPOSTQuoteURL.Name = "txtPOSTQuoteURL";
+            this.txtPOSTQuoteURL.Size = new System.Drawing.Size(348, 26);
+            this.txtPOSTQuoteURL.TabIndex = 19;
+            this.txtPOSTQuoteURL.TextChanged += new System.EventHandler(this.txtPOSTQuoteURL_TextChanged);
             // 
-            // textBox5
+            // txtGETPredictionURL
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(205, 331);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(348, 26);
-            this.textBox5.TabIndex = 20;
+            this.txtGETPredictionURL.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGETPredictionURL.Location = new System.Drawing.Point(205, 336);
+            this.txtGETPredictionURL.Name = "txtGETPredictionURL";
+            this.txtGETPredictionURL.Size = new System.Drawing.Size(348, 26);
+            this.txtGETPredictionURL.TabIndex = 20;
+            this.txtGETPredictionURL.TextChanged += new System.EventHandler(this.txtGETPredictionURL_TextChanged);
             // 
             // btnCancelar
             // 
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(378, 395);
+            this.btnCancelar.Location = new System.Drawing.Point(333, 465);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(101, 44);
+            this.btnCancelar.Size = new System.Drawing.Size(101, 46);
             this.btnCancelar.TabIndex = 21;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -268,10 +286,11 @@ namespace ProfitChartBotMLBased
             // 
             // btnOK
             // 
+            this.btnOK.Enabled = false;
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(497, 395);
+            this.btnOK.Location = new System.Drawing.Point(452, 465);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(101, 44);
+            this.btnOK.Size = new System.Drawing.Size(101, 46);
             this.btnOK.TabIndex = 22;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -293,6 +312,7 @@ namespace ProfitChartBotMLBased
             this.txtClosePositions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtClosePositions.Location = new System.Drawing.Point(205, 135);
             this.txtClosePositions.Name = "txtClosePositions";
+            this.txtClosePositions.ReadOnly = true;
             this.txtClosePositions.Size = new System.Drawing.Size(351, 26);
             this.txtClosePositions.TabIndex = 24;
             // 
@@ -306,23 +326,93 @@ namespace ProfitChartBotMLBased
             this.lblClosePositions.TabIndex = 23;
             this.lblClosePositions.Text = "Close Positions:";
             // 
+            // txtTextLogDir
+            // 
+            this.txtTextLogDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTextLogDir.Location = new System.Drawing.Point(205, 378);
+            this.txtTextLogDir.Name = "txtTextLogDir";
+            this.txtTextLogDir.ReadOnly = true;
+            this.txtTextLogDir.Size = new System.Drawing.Size(348, 26);
+            this.txtTextLogDir.TabIndex = 27;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(12, 378);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(111, 20);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Text Log Dir:";
+            // 
+            // txtImageLogDir
+            // 
+            this.txtImageLogDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtImageLogDir.Location = new System.Drawing.Point(205, 420);
+            this.txtImageLogDir.Name = "txtImageLogDir";
+            this.txtImageLogDir.ReadOnly = true;
+            this.txtImageLogDir.Size = new System.Drawing.Size(348, 26);
+            this.txtImageLogDir.TabIndex = 29;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(12, 420);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(127, 20);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "Image Log Dir:";
+            // 
+            // searchTesseractEXE
+            // 
+            this.searchTesseractEXE.FileName = "tesseract.exe";
+            // 
+            // btnTextLogDirLocation
+            // 
+            this.btnTextLogDirLocation.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTextLogDirLocation.Location = new System.Drawing.Point(559, 377);
+            this.btnTextLogDirLocation.Name = "btnTextLogDirLocation";
+            this.btnTextLogDirLocation.Size = new System.Drawing.Size(39, 30);
+            this.btnTextLogDirLocation.TabIndex = 30;
+            this.btnTextLogDirLocation.Text = "...";
+            this.btnTextLogDirLocation.UseVisualStyleBackColor = true;
+            this.btnTextLogDirLocation.Click += new System.EventHandler(this.btnTextLogDirLocation_Click);
+            // 
+            // btnImageLogDir
+            // 
+            this.btnImageLogDir.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImageLogDir.Location = new System.Drawing.Point(559, 420);
+            this.btnImageLogDir.Name = "btnImageLogDir";
+            this.btnImageLogDir.Size = new System.Drawing.Size(39, 30);
+            this.btnImageLogDir.TabIndex = 31;
+            this.btnImageLogDir.Text = "...";
+            this.btnImageLogDir.UseVisualStyleBackColor = true;
+            this.btnImageLogDir.Click += new System.EventHandler(this.btnImageLogDir_Click);
+            // 
             // frmConfigure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 452);
+            this.ClientSize = new System.Drawing.Size(608, 523);
+            this.Controls.Add(this.btnImageLogDir);
+            this.Controls.Add(this.btnTextLogDirLocation);
+            this.Controls.Add(this.txtImageLogDir);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtTextLogDir);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnClosePositions);
             this.Controls.Add(this.txtClosePositions);
             this.Controls.Add(this.lblClosePositions);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtGETPredictionURL);
+            this.Controls.Add(this.txtPOSTQuoteURL);
+            this.Controls.Add(this.txtGETParametersURL);
             this.Controls.Add(this.btnTessdataLocation);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtTessDataLocation);
             this.Controls.Add(this.btnTesseractExecutable);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtTesseractExecutable);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -344,7 +434,7 @@ namespace ProfitChartBotMLBased
             this.Name = "frmConfigure";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bot Configuration";
-            this.Load += new System.EventHandler(this.frmConfigure_Load);
+            this.Click += new System.EventHandler(this.frmConfigure_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,17 +456,25 @@ namespace ProfitChartBotMLBased
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTesseractExecutable;
         private System.Windows.Forms.Button btnTesseractExecutable;
         private System.Windows.Forms.Button btnTessdataLocation;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtTessDataLocation;
+        private System.Windows.Forms.TextBox txtGETParametersURL;
+        private System.Windows.Forms.TextBox txtPOSTQuoteURL;
+        private System.Windows.Forms.TextBox txtGETPredictionURL;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnClosePositions;
         private System.Windows.Forms.TextBox txtClosePositions;
         private System.Windows.Forms.Label lblClosePositions;
+        private System.Windows.Forms.TextBox txtTextLogDir;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtImageLogDir;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.OpenFileDialog searchTesseractEXE;
+        private System.Windows.Forms.FolderBrowserDialog searchTessdataFolder;
+        private System.Windows.Forms.Button btnTextLogDirLocation;
+        private System.Windows.Forms.Button btnImageLogDir;
     }
 }

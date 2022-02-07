@@ -48,6 +48,36 @@ namespace ProfitChartBotMLBased
                     _currentConfiguration.ClosePositions.X,
                     _currentConfiguration.ClosePositions.Y);
             }
+            if (!(String.IsNullOrEmpty(_currentConfiguration.TesseractExecutable)))
+            {
+                txtTesseractExecutable.Text = _currentConfiguration.TesseractExecutable;
+            }
+            if (!(String.IsNullOrEmpty(_currentConfiguration.TessDataLocation)))
+            {
+                txtTessDataLocation.Text = _currentConfiguration.TessDataLocation;
+            }
+            if(!(String.IsNullOrEmpty(_currentConfiguration.TextLogDir)))
+            {
+                txtTextLogDir.Text = _currentConfiguration.TextLogDir;
+            }
+            if(!(String.IsNullOrEmpty(_currentConfiguration.ImageLogDir)))
+            {
+                txtImageLogDir.Text = _currentConfiguration.ImageLogDir;
+            }
+            if(!(String.IsNullOrEmpty(_currentConfiguration.GETParametersURL)))
+            {
+                txtGETParametersURL.Text = _currentConfiguration.GETParametersURL;
+            }
+            if(!(String.IsNullOrEmpty(_currentConfiguration.GETPredictionURL)))
+            {
+                txtGETPredictionURL.Text = _currentConfiguration.GETPredictionURL;
+            }
+            if(!(String.IsNullOrEmpty(_currentConfiguration.POSTQuoteURL)))
+            {
+                txtPOSTQuoteURL.Text = _currentConfiguration.POSTQuoteURL;
+            }
+
+            btnOK.Enabled = _currentConfiguration.IsDataComplete();
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -151,6 +181,67 @@ namespace ProfitChartBotMLBased
             if (result == DialogResult.OK)
             {
                 _currentConfiguration.ClosePositions = frm.ResultingPoint;
+            }
+
+            RefreshControls();
+        }
+
+        private void btnTesseractExecutable_Click(object sender, EventArgs e)
+        {
+
+            if(searchTesseractEXE.ShowDialog() == DialogResult.OK) 
+            {
+                _currentConfiguration.TesseractExecutable = searchTesseractEXE.FileName;
+            }
+
+            RefreshControls();
+        }
+
+        private void btnTessdataLocation_Click(object sender, EventArgs e)
+        {
+            if(searchTessdataFolder.ShowDialog() == DialogResult.OK)
+            {
+                _currentConfiguration.TessDataLocation = searchTessdataFolder.SelectedPath;
+            }
+
+            RefreshControls();
+        }
+
+        private void frmConfigure_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtGETParametersURL_TextChanged(object sender, EventArgs e)
+        {
+            _currentConfiguration.GETParametersURL = txtGETParametersURL.Text;
+        }
+
+        private void txtPOSTQuoteURL_TextChanged(object sender, EventArgs e)
+        {
+            _currentConfiguration.POSTQuoteURL = txtPOSTQuoteURL.Text;
+        }
+
+        private void txtGETPredictionURL_TextChanged(object sender, EventArgs e)
+        {
+            _currentConfiguration.GETPredictionURL = txtGETPredictionURL.Text;
+        }
+
+        private void btnTextLogDirLocation_Click(object sender, EventArgs e)
+        {
+            if(searchTessdataFolder.ShowDialog() == DialogResult.OK)
+            {
+                _currentConfiguration.TextLogDir = searchTessdataFolder.SelectedPath;
+            }
+
+            RefreshControls();
+        }
+
+        private void btnImageLogDir_Click(object sender, EventArgs e)
+        {
+            if(searchTessdataFolder.ShowDialog() == DialogResult.OK)
+            {
+                _currentConfiguration.ImageLogDir = searchTessdataFolder.SelectedPath;
             }
 
             RefreshControls();
