@@ -14,6 +14,14 @@ namespace ProfitChartBotMLBased
     public partial class frmConfigure : Form
     {
         private ProfitChartBotMLBasedConfiguration _currentConfiguration;
+
+        public ProfitChartBotMLBasedConfiguration Configuration
+        {
+            get
+            {
+                return _currentConfiguration;
+            }
+        }
         public frmConfigure(ProfitChartBotMLBasedConfiguration currentConfiguration)
         {
             _currentConfiguration = currentConfiguration;
@@ -56,23 +64,23 @@ namespace ProfitChartBotMLBased
             {
                 txtTessDataLocation.Text = _currentConfiguration.TessDataLocation;
             }
-            if(!(String.IsNullOrEmpty(_currentConfiguration.TextLogDir)))
+            if (!(String.IsNullOrEmpty(_currentConfiguration.TextLogDir)))
             {
                 txtTextLogDir.Text = _currentConfiguration.TextLogDir;
             }
-            if(!(String.IsNullOrEmpty(_currentConfiguration.ImageLogDir)))
+            if (!(String.IsNullOrEmpty(_currentConfiguration.ImageLogDir)))
             {
                 txtImageLogDir.Text = _currentConfiguration.ImageLogDir;
             }
-            if(!(String.IsNullOrEmpty(_currentConfiguration.GETParametersURL)))
+            if (!(String.IsNullOrEmpty(_currentConfiguration.GETParametersURL)))
             {
                 txtGETParametersURL.Text = _currentConfiguration.GETParametersURL;
             }
-            if(!(String.IsNullOrEmpty(_currentConfiguration.GETPredictionURL)))
+            if (!(String.IsNullOrEmpty(_currentConfiguration.GETPredictionURL)))
             {
                 txtGETPredictionURL.Text = _currentConfiguration.GETPredictionURL;
             }
-            if(!(String.IsNullOrEmpty(_currentConfiguration.POSTQuoteURL)))
+            if (!(String.IsNullOrEmpty(_currentConfiguration.POSTQuoteURL)))
             {
                 txtPOSTQuoteURL.Text = _currentConfiguration.POSTQuoteURL;
             }
@@ -84,7 +92,7 @@ namespace ProfitChartBotMLBased
         {
             if (String.IsNullOrEmpty(txtIndicatorsRegion.Text))
             {
-                MessageBox.Show("Please select the indicators Region...", "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Please select the indicators Region...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtIndicatorsRegion.Focus();
                 return;
             }
@@ -162,6 +170,12 @@ namespace ProfitChartBotMLBased
 
         private void frmConfigure_Load(object sender, EventArgs e)
         {
+
+            RefreshControls();
+
+            txtImageLogDir.Text = ".\\logimg";
+            txtTextLogDir.Text = ".\\logtext";
+
             RefreshControls();
         }
 
@@ -189,7 +203,7 @@ namespace ProfitChartBotMLBased
         private void btnTesseractExecutable_Click(object sender, EventArgs e)
         {
 
-            if(searchTesseractEXE.ShowDialog() == DialogResult.OK) 
+            if (searchTesseractEXE.ShowDialog() == DialogResult.OK)
             {
                 _currentConfiguration.TesseractExecutable = searchTesseractEXE.FileName;
             }
@@ -199,7 +213,7 @@ namespace ProfitChartBotMLBased
 
         private void btnTessdataLocation_Click(object sender, EventArgs e)
         {
-            if(searchTessdataFolder.ShowDialog() == DialogResult.OK)
+            if (searchTessdataFolder.ShowDialog() == DialogResult.OK)
             {
                 _currentConfiguration.TessDataLocation = searchTessdataFolder.SelectedPath;
             }
@@ -215,21 +229,27 @@ namespace ProfitChartBotMLBased
         private void txtGETParametersURL_TextChanged(object sender, EventArgs e)
         {
             _currentConfiguration.GETParametersURL = txtGETParametersURL.Text;
+
+            RefreshControls();
         }
 
         private void txtPOSTQuoteURL_TextChanged(object sender, EventArgs e)
         {
             _currentConfiguration.POSTQuoteURL = txtPOSTQuoteURL.Text;
+
+            RefreshControls();
         }
 
         private void txtGETPredictionURL_TextChanged(object sender, EventArgs e)
         {
             _currentConfiguration.GETPredictionURL = txtGETPredictionURL.Text;
+
+            RefreshControls();
         }
 
         private void btnTextLogDirLocation_Click(object sender, EventArgs e)
         {
-            if(searchTessdataFolder.ShowDialog() == DialogResult.OK)
+            if (searchTessdataFolder.ShowDialog() == DialogResult.OK)
             {
                 _currentConfiguration.TextLogDir = searchTessdataFolder.SelectedPath;
             }
@@ -239,10 +259,24 @@ namespace ProfitChartBotMLBased
 
         private void btnImageLogDir_Click(object sender, EventArgs e)
         {
-            if(searchTessdataFolder.ShowDialog() == DialogResult.OK)
+            if (searchTessdataFolder.ShowDialog() == DialogResult.OK)
             {
                 _currentConfiguration.ImageLogDir = searchTessdataFolder.SelectedPath;
             }
+
+            RefreshControls();
+        }
+
+        private void txtTextLogDir_TextChanged(object sender, EventArgs e)
+        {
+            _currentConfiguration.TextLogDir = txtTextLogDir.Text;
+
+            RefreshControls();
+        }
+
+        private void txtImageLogDir_TextChanged(object sender, EventArgs e)
+        {
+            _currentConfiguration.ImageLogDir = txtImageLogDir.Text;
 
             RefreshControls();
         }

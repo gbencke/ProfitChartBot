@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ProfitChartBotScanner
 {
@@ -13,25 +14,38 @@ namespace ProfitChartBotScanner
         public int _Width;
         public int _Height;
 
-        public int X {  
-            get {
+
+        [JsonProperty("x")]
+        public int X
+        {
+            get
+            {
                 return _X;
-            } 
+            }
         }
-        public int Y {  
-            get {
+        [JsonProperty("y")]
+        public int Y
+        {
+            get
+            {
                 return _Y;
-            } 
+            }
         }
-        public int Width {  
-            get {
+        [JsonProperty("width")]
+        public int Width
+        {
+            get
+            {
                 return _Width;
-            } 
+            }
         }
-        public int Height {  
-            get {
+        [JsonProperty("height")]
+        public int Height
+        {
+            get
+            {
                 return _Height;
-            } 
+            }
         }
 
         public ScreenRectangle(int X, int Y, int Width, int Height)

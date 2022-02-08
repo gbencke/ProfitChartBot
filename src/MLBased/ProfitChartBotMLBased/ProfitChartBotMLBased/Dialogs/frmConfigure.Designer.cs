@@ -334,6 +334,7 @@ namespace ProfitChartBotMLBased
             this.txtTextLogDir.ReadOnly = true;
             this.txtTextLogDir.Size = new System.Drawing.Size(348, 26);
             this.txtTextLogDir.TabIndex = 27;
+            this.txtTextLogDir.TextChanged += new System.EventHandler(this.txtTextLogDir_TextChanged);
             // 
             // label6
             // 
@@ -353,6 +354,7 @@ namespace ProfitChartBotMLBased
             this.txtImageLogDir.ReadOnly = true;
             this.txtImageLogDir.Size = new System.Drawing.Size(348, 26);
             this.txtImageLogDir.TabIndex = 29;
+            this.txtImageLogDir.TextChanged += new System.EventHandler(this.txtImageLogDir_TextChanged);
             // 
             // label7
             // 
@@ -434,7 +436,7 @@ namespace ProfitChartBotMLBased
             this.Name = "frmConfigure";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bot Configuration";
-            this.Click += new System.EventHandler(this.frmConfigure_Click);
+            this.Load += new System.EventHandler(this.frmConfigure_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

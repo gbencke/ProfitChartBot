@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ProfitChartBotScanner
 {
@@ -20,6 +21,7 @@ namespace ProfitChartBotScanner
         private String _TextLogDir = null;
         private String _ImageLogDir = null;
 
+        [JsonProperty("indicators_region")]
         public ScreenRectangle IndicatorsRegion
         {
             get
@@ -32,6 +34,7 @@ namespace ProfitChartBotScanner
             }
         }
 
+        [JsonProperty("start_long_position")]
         public ScreenPoint StartLongPosition
         {
             get
@@ -43,6 +46,7 @@ namespace ProfitChartBotScanner
                 _StartLongPosition = value;
             }
         }
+        [JsonProperty("start_short_position")]
         public ScreenPoint StartShortPosition
         {
             get
@@ -54,6 +58,7 @@ namespace ProfitChartBotScanner
                 _StartShortPosition = value;
             }
         }
+        [JsonProperty("close_positions")]
         public ScreenPoint ClosePositions
         {
             get
@@ -66,6 +71,7 @@ namespace ProfitChartBotScanner
             }
         }
 
+        [JsonProperty("tesseract_executable")]
         public String TesseractExecutable
         {
             get
@@ -78,6 +84,8 @@ namespace ProfitChartBotScanner
                 _TesseractExecutable = value;
             }
         }
+
+        [JsonProperty("tessdata_location")]
         public String TessDataLocation
         {
             get
@@ -90,6 +98,7 @@ namespace ProfitChartBotScanner
             }
         }
 
+        [JsonProperty("get_parameters_url")]
         public String GETParametersURL
         {
             get
@@ -102,6 +111,7 @@ namespace ProfitChartBotScanner
             }
         }
 
+        [JsonProperty("post_quote_url")]
         public String POSTQuoteURL
         {
             get
@@ -113,6 +123,8 @@ namespace ProfitChartBotScanner
                 _POSTQuoteURL = value;
             }
         }
+
+        [JsonProperty("get_prediction_url")]
         public String GETPredictionURL
         {
             get
@@ -124,6 +136,8 @@ namespace ProfitChartBotScanner
                 _GETPredictionURL = value;
             }
         }
+
+        [JsonProperty("text_log_dir")]
         public String TextLogDir
         {
             get
@@ -135,6 +149,7 @@ namespace ProfitChartBotScanner
                 _TextLogDir = value;
             }
         }
+        [JsonProperty("image_log_dir")]
         public string ImageLogDir
         {
             get
