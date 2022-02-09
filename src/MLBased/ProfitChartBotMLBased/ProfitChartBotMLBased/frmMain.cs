@@ -14,12 +14,13 @@ using Newtonsoft.Json;
 
 namespace ProfitChartBotMLBased
 {
-    public partial class frmMain : Form
+    public partial class frmMain : Form, IObserverProfitChartBotScanner
     {
         private ProfitChartBotMLBasedConfiguration _configuration;
         private String _currentExecutableFolder;
         private String _currentConfigurationFile;
         private String _currentConfigurationJSON;
+        private IProfitChartBotScannerService _service;
 
         public frmMain()
         {
@@ -114,6 +115,9 @@ namespace ProfitChartBotMLBased
                         Directory.CreateDirectory(_configuration.ImageLogDir);
                     }
 
+                    _service = new ProfitChartBotScannerService();
+                    _service.Initialize(_configuration, this);
+
                     RefreshControls();
 
                 }
@@ -130,6 +134,11 @@ namespace ProfitChartBotMLBased
                 MessageBox.Show(this, ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+
+        public void Observe(Observation Observed)
+        {
+            statusStrip1.Items[0].Text = Observed.Message;
         }
     }
 }

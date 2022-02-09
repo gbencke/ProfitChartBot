@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProfitChartBotScanner
 {
-    public class Class1
+    public interface IProfitChartBotScannerService
     {
+        void Initialize(ProfitChartBotMLBasedConfiguration configuration, IObserverProfitChartBotScanner observer);
+
     }
 }
