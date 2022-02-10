@@ -46,7 +46,7 @@ namespace ProfitChartBotMLBased
         {
             get
             {
-                return Top + 55;
+                return Top + 35;
             }
         }
         private int RectWidth
@@ -60,7 +60,7 @@ namespace ProfitChartBotMLBased
         {
             get
             {
-                return Height - 120;
+                return Height - 100;
             }
         }
 

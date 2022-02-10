@@ -20,6 +20,7 @@ namespace ProfitChartBotScanner
         private String _GETPredictionURL = null;
         private String _TextLogDir = null;
         private String _ImageLogDir = null;
+        private int? _IntervalScanning = null;
 
         [JsonProperty("indicators_region")]
         public ScreenRectangle IndicatorsRegion
@@ -161,6 +162,18 @@ namespace ProfitChartBotScanner
                 _ImageLogDir = value;
             }
         }
+        [JsonProperty("interval_scanning")]
+        public int? IntervalScanning
+        {
+            get
+            {
+                return _IntervalScanning;
+            }
+            set
+            {
+                _IntervalScanning = value;
+            }
+        }
 
         public bool HasIndicatorsRegion()
         {
@@ -179,7 +192,8 @@ namespace ProfitChartBotScanner
             _POSTQuoteURL != null &&
             _GETPredictionURL != null &&
             _TextLogDir != null &&
-            _ImageLogDir != null;
+            _ImageLogDir != null && 
+            _IntervalScanning.HasValue;
         }
     }
 }

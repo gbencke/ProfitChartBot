@@ -12,15 +12,19 @@ namespace ProfitChartBotScanner
         private ProfitChartBotScannerStatus _ProfitChartBotState = ProfitChartBotScannerStatus.NonInitialized;
         private IObserverProfitChartBotScanner _Observer;
         private ModelParameters _ModelParameters;
+        private ProfitChartScanHelper _scanner;
+        private ProfitChartBotMLBasedConfiguration _configuration;
+        private bool _ShouldRun = false;
 
         public void Initialize(ProfitChartBotMLBasedConfiguration configuration, IObserverProfitChartBotScanner observer)
         {
-            if(_ProfitChartBotState != ProfitChartBotScannerStatus.NonInitialized)
+            if (_ProfitChartBotState != ProfitChartBotScannerStatus.NonInitialized)
             {
                 throw new ProfitChartScannerInitializedException("Initialization has already been tried in this instance...");
             }
 
             _Observer = observer;
+            _configuration = configuration;
 
             var ReceiveParametersThread = new Thread(() =>
             {
@@ -32,17 +36,54 @@ namespace ProfitChartBotScanner
                 try
                 {
                     _ModelParameters = HTTPHelper.GetParameters(URL, 30000);
-                }catch(Exception ex)
+                    _Observer.Observe(new Observation(ObservationType.ParametersRead, "Parametros do Modelo foram lidos do Servidor..."));
+                    _ProfitChartBotState = ProfitChartBotScannerStatus.ParametersReceived;
+                }
+                catch (Exception ex)
                 {
                     _Observer.Observe(new Observation(ObservationType.ErrorInReadingParameters, "Erro na Leitura dos Parametros:" + ex.Message));
                     _ProfitChartBotState = ProfitChartBotScannerStatus.ParametersError;
                 }
 
-                _Observer.Observe(new Observation(ObservationType.ParametersRead, "Parametros do Modelo foram lidos do Servidor..."));
-                _ProfitChartBotState = ProfitChartBotScannerStatus.ParametersReceived;
             });
 
             ReceiveParametersThread.Start();
+        }
+
+        public void ExecuteScanning()
+        {
+            ProfitChartScanResult _lastResult = null;
+
+            _Observer.Observe(new Observation(ObservationType.RunningScanner, "Running the Scanning for ProfitChart"));
+            _ProfitChartBotState = ProfitChartBotScannerStatus.Running;
+            _scanner = new ProfitChartScanHelper(_configuration);
+
+            while (_ShouldRun)
+            {
+                Thread.Sleep(_configuration.IntervalScanning.Value);
+
+                ProfitChartScanResult nextResult = _scanner.GetNextScan();
+
+                if (nextResult != null)
+                {
+                    if (_lastResult != null && _lastResult == nextResult)
+                    {
+                        continue;
+                    }
+
+                    _lastResult = nextResult;
+                }
+
+            }
+
+        }
+
+        Thread _scannerExecutionThread;
+        public void StartExecution()
+        {
+            _ShouldRun = true;
+            _scannerExecutionThread = new Thread(ExecuteScanning);
+            _scannerExecutionThread.Start();
         }
     }
 }

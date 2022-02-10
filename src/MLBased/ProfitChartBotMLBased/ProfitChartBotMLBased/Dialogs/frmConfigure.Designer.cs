@@ -64,6 +64,9 @@ namespace ProfitChartBotMLBased
             this.searchTessdataFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.btnTextLogDirLocation = new System.Windows.Forms.Button();
             this.btnImageLogDir = new System.Windows.Forms.Button();
+            this.txtProfitScanInterval = new System.Windows.Forms.TextBox();
+            this.lblProfitScanInterval = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblIndicatorsRegion
@@ -276,7 +279,7 @@ namespace ProfitChartBotMLBased
             // btnCancelar
             // 
             this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.Location = new System.Drawing.Point(333, 465);
+            this.btnCancelar.Location = new System.Drawing.Point(333, 506);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(101, 46);
             this.btnCancelar.TabIndex = 21;
@@ -288,7 +291,7 @@ namespace ProfitChartBotMLBased
             // 
             this.btnOK.Enabled = false;
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(452, 465);
+            this.btnOK.Location = new System.Drawing.Point(452, 506);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(101, 46);
             this.btnOK.TabIndex = 22;
@@ -392,11 +395,45 @@ namespace ProfitChartBotMLBased
             this.btnImageLogDir.UseVisualStyleBackColor = true;
             this.btnImageLogDir.Click += new System.EventHandler(this.btnImageLogDir_Click);
             // 
+            // txtProfitScanInterval
+            // 
+            this.txtProfitScanInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProfitScanInterval.Location = new System.Drawing.Point(205, 458);
+            this.txtProfitScanInterval.Name = "txtProfitScanInterval";
+            this.txtProfitScanInterval.Size = new System.Drawing.Size(348, 26);
+            this.txtProfitScanInterval.TabIndex = 33;
+            this.txtProfitScanInterval.TextChanged += new System.EventHandler(this.txtProfitScanInterval_TextChanged);
+            this.txtProfitScanInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProfitScanInterval_KeyPress);
+            this.txtProfitScanInterval.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtProfitScanInterval_KeyUp);
+            // 
+            // lblProfitScanInterval
+            // 
+            this.lblProfitScanInterval.AutoSize = true;
+            this.lblProfitScanInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProfitScanInterval.Location = new System.Drawing.Point(12, 458);
+            this.lblProfitScanInterval.Name = "lblProfitScanInterval";
+            this.lblProfitScanInterval.Size = new System.Drawing.Size(168, 20);
+            this.lblProfitScanInterval.TabIndex = 32;
+            this.lblProfitScanInterval.Text = "Profit Scan Interval:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(561, 460);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 20);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "ms";
+            // 
             // frmConfigure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 523);
+            this.ClientSize = new System.Drawing.Size(608, 564);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtProfitScanInterval);
+            this.Controls.Add(this.lblProfitScanInterval);
             this.Controls.Add(this.btnImageLogDir);
             this.Controls.Add(this.btnTextLogDirLocation);
             this.Controls.Add(this.txtImageLogDir);
@@ -478,5 +515,8 @@ namespace ProfitChartBotMLBased
         private System.Windows.Forms.FolderBrowserDialog searchTessdataFolder;
         private System.Windows.Forms.Button btnTextLogDirLocation;
         private System.Windows.Forms.Button btnImageLogDir;
+        private System.Windows.Forms.TextBox txtProfitScanInterval;
+        private System.Windows.Forms.Label lblProfitScanInterval;
+        private System.Windows.Forms.Label label9;
     }
 }

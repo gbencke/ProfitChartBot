@@ -44,6 +44,9 @@ namespace ProfitChartBotMLBased
                     File.WriteAllText(_currentConfigurationFile, _currentConfigurationJSON);
                 }
 
+                _service = new ProfitChartBotScannerService();
+                _service.Initialize(_configuration, this);
+
                 RefreshControls();
 
             }catch(Exception ex)
@@ -54,7 +57,7 @@ namespace ProfitChartBotMLBased
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            _service.StartExecution();
         }
 
         private void HideAllControls()

@@ -10,5 +10,7 @@ namespace ProfitChartBotScanner
     {
         void Initialize(ProfitChartBotMLBasedConfiguration configuration, IObserverProfitChartBotScanner observer);
 
+        void StartExecution();
+
     }
 }

@@ -67,6 +67,7 @@
     <Compile Include="Enums\ProfitChartBotScannerStatus.cs" />
     <Compile Include="Exceptions\ProfitChartScannerInitializedException.cs" />
     <Compile Include="Helper\HTTPHelper.cs" />
+    <Compile Include="Helper\ProfitChartScanHelper.cs" />
     <Compile Include="Observer\IObserverProfitChartBotScanner.cs" />
     <Compile Include="Observer\Observation.cs" />
     <Compile Include="Observer\ObservationType.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Services\Implementation\ProfitChartBotScannerService.cs" />
     <Compile Include="Services\IProfitChartBotScannerService.cs" />
     <Compile Include="ValueObjects\ModelParameters.cs" />
+    <Compile Include="ValueObjects\ProfitChartScanResult.cs" />
     <Compile Include="ValueObjects\ScreenPoint.cs" />
     <Compile Include="ValueObjects\ScreenRectangle.cs" />
     <Compile Include="ValueObjects\ProfitChartBotMLBasedConfiguration.cs" />

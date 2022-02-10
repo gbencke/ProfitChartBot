@@ -84,6 +84,10 @@ namespace ProfitChartBotMLBased
             {
                 txtPOSTQuoteURL.Text = _currentConfiguration.POSTQuoteURL;
             }
+            if (_currentConfiguration.IntervalScanning.HasValue)
+            {
+                txtProfitScanInterval.Text = _currentConfiguration.IntervalScanning.Value.ToString();
+            }
 
             btnOK.Enabled = _currentConfiguration.IsDataComplete();
         }
@@ -279,6 +283,32 @@ namespace ProfitChartBotMLBased
             _currentConfiguration.ImageLogDir = txtImageLogDir.Text;
 
             RefreshControls();
+        }
+
+        private void txtProfitScanInterval_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtProfitScanInterval.Text))
+            {
+                _currentConfiguration.IntervalScanning = null;
+                return;
+            }
+
+            _currentConfiguration.IntervalScanning = Convert.ToInt32(txtProfitScanInterval.Text);
+
+            RefreshControls();
+        }
+
+        private void txtProfitScanInterval_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void txtProfitScanInterval_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
