@@ -64,13 +64,15 @@ namespace ProfitChartBotScanner
 
                 ProfitChartScanResult nextResult = _scanner.GetNextScan();
 
-                if (nextResult != null)
+                if (!(nextResult is null))
                 {
-                    if (_lastResult != null && _lastResult == nextResult)
+                    if (!(_lastResult is null) && _lastResult.Equals(nextResult))
                     {
                         continue;
                     }
 
+                    ProfitChartScannerLogging.LogResult(nextResult);
+                    _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult));
                     _lastResult = nextResult;
                 }
 

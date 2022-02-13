@@ -29,6 +29,7 @@ namespace ProfitChartBotMLBased
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.sistemaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +45,29 @@ namespace ProfitChartBotMLBased
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblNeedToConfigure = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.lblHigh = new System.Windows.Forms.Label();
+            this.lblLastClose = new System.Windows.Forms.Label();
+            this.lblLastHigh = new System.Windows.Forms.Label();
+            this.lblLastLow = new System.Windows.Forms.Label();
+            this.lblLastOpen = new System.Windows.Forms.Label();
+            this.lblLastVolume = new System.Windows.Forms.Label();
+            this.lblPredicted = new System.Windows.Forms.Label();
+            this.lblOrderStatus = new System.Windows.Forms.Label();
+            this.txtTime = new System.Windows.Forms.TextBox();
+            this.txtDate = new System.Windows.Forms.TextBox();
+            this.txtHigh = new System.Windows.Forms.TextBox();
+            this.txtPredicted = new System.Windows.Forms.TextBox();
+            this.txtOrderStatus = new System.Windows.Forms.TextBox();
+            this.txtLastVolume = new System.Windows.Forms.TextBox();
+            this.txtLastOpen = new System.Windows.Forms.TextBox();
+            this.txtLastLow = new System.Windows.Forms.TextBox();
+            this.txtLastHigh = new System.Windows.Forms.TextBox();
+            this.txtLastClose = new System.Windows.Forms.TextBox();
+            this.timerObservations = new System.Windows.Forms.Timer(this.components);
+            this.txtLow = new System.Windows.Forms.TextBox();
+            this.lblLow = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +80,8 @@ namespace ProfitChartBotMLBased
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(661, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -134,11 +159,13 @@ namespace ProfitChartBotMLBased
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.Transparent;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 273);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(661, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -152,26 +179,309 @@ namespace ProfitChartBotMLBased
             // lblNeedToConfigure
             // 
             this.lblNeedToConfigure.AutoSize = true;
-            this.lblNeedToConfigure.Font = new System.Drawing.Font("Cousine", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNeedToConfigure.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNeedToConfigure.ForeColor = System.Drawing.Color.Red;
-            this.lblNeedToConfigure.Location = new System.Drawing.Point(12, 34);
+            this.lblNeedToConfigure.Location = new System.Drawing.Point(10, 236);
+            this.lblNeedToConfigure.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNeedToConfigure.Name = "lblNeedToConfigure";
-            this.lblNeedToConfigure.Size = new System.Drawing.Size(681, 21);
+            this.lblNeedToConfigure.Size = new System.Drawing.Size(496, 16);
             this.lblNeedToConfigure.TabIndex = 2;
             this.lblNeedToConfigure.Text = "This Bot has no current Configuration, please configure it...";
             // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.Blue;
+            this.lblTime.Location = new System.Drawing.Point(10, 31);
+            this.lblTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(48, 16);
+            this.lblTime.TabIndex = 3;
+            this.lblTime.Text = "Time:";
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.ForeColor = System.Drawing.Color.Blue;
+            this.lblDate.Location = new System.Drawing.Point(10, 65);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(48, 16);
+            this.lblDate.TabIndex = 4;
+            this.lblDate.Text = "Date:";
+            // 
+            // lblHigh
+            // 
+            this.lblHigh.AutoSize = true;
+            this.lblHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHigh.ForeColor = System.Drawing.Color.Blue;
+            this.lblHigh.Location = new System.Drawing.Point(10, 100);
+            this.lblHigh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblHigh.Name = "lblHigh";
+            this.lblHigh.Size = new System.Drawing.Size(48, 16);
+            this.lblHigh.TabIndex = 5;
+            this.lblHigh.Text = "High:";
+            // 
+            // lblLastClose
+            // 
+            this.lblLastClose.AutoSize = true;
+            this.lblLastClose.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastClose.ForeColor = System.Drawing.Color.Blue;
+            this.lblLastClose.Location = new System.Drawing.Point(383, 31);
+            this.lblLastClose.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLastClose.Name = "lblLastClose";
+            this.lblLastClose.Size = new System.Drawing.Size(96, 16);
+            this.lblLastClose.TabIndex = 6;
+            this.lblLastClose.Text = "Last Close:";
+            // 
+            // lblLastHigh
+            // 
+            this.lblLastHigh.AutoSize = true;
+            this.lblLastHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastHigh.ForeColor = System.Drawing.Color.Blue;
+            this.lblLastHigh.Location = new System.Drawing.Point(383, 65);
+            this.lblLastHigh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLastHigh.Name = "lblLastHigh";
+            this.lblLastHigh.Size = new System.Drawing.Size(88, 16);
+            this.lblLastHigh.TabIndex = 7;
+            this.lblLastHigh.Text = "Last High:";
+            // 
+            // lblLastLow
+            // 
+            this.lblLastLow.AutoSize = true;
+            this.lblLastLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastLow.ForeColor = System.Drawing.Color.Blue;
+            this.lblLastLow.Location = new System.Drawing.Point(383, 100);
+            this.lblLastLow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLastLow.Name = "lblLastLow";
+            this.lblLastLow.Size = new System.Drawing.Size(80, 16);
+            this.lblLastLow.TabIndex = 8;
+            this.lblLastLow.Text = "Last Low:";
+            // 
+            // lblLastOpen
+            // 
+            this.lblLastOpen.AutoSize = true;
+            this.lblLastOpen.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastOpen.ForeColor = System.Drawing.Color.Blue;
+            this.lblLastOpen.Location = new System.Drawing.Point(383, 134);
+            this.lblLastOpen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLastOpen.Name = "lblLastOpen";
+            this.lblLastOpen.Size = new System.Drawing.Size(88, 16);
+            this.lblLastOpen.TabIndex = 9;
+            this.lblLastOpen.Text = "Last Open:";
+            // 
+            // lblLastVolume
+            // 
+            this.lblLastVolume.AutoSize = true;
+            this.lblLastVolume.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastVolume.ForeColor = System.Drawing.Color.Blue;
+            this.lblLastVolume.Location = new System.Drawing.Point(383, 169);
+            this.lblLastVolume.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLastVolume.Name = "lblLastVolume";
+            this.lblLastVolume.Size = new System.Drawing.Size(104, 16);
+            this.lblLastVolume.TabIndex = 10;
+            this.lblLastVolume.Text = "Last Volume:";
+            // 
+            // lblPredicted
+            // 
+            this.lblPredicted.AutoSize = true;
+            this.lblPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPredicted.ForeColor = System.Drawing.Color.Blue;
+            this.lblPredicted.Location = new System.Drawing.Point(10, 166);
+            this.lblPredicted.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPredicted.Name = "lblPredicted";
+            this.lblPredicted.Size = new System.Drawing.Size(168, 16);
+            this.lblPredicted.TabIndex = 11;
+            this.lblPredicted.Text = "Predicted(Boundary):";
+            // 
+            // lblOrderStatus
+            // 
+            this.lblOrderStatus.AutoSize = true;
+            this.lblOrderStatus.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderStatus.ForeColor = System.Drawing.Color.Blue;
+            this.lblOrderStatus.Location = new System.Drawing.Point(10, 200);
+            this.lblOrderStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOrderStatus.Name = "lblOrderStatus";
+            this.lblOrderStatus.Size = new System.Drawing.Size(112, 16);
+            this.lblOrderStatus.TabIndex = 12;
+            this.lblOrderStatus.Text = "Order Status:";
+            // 
+            // txtTime
+            // 
+            this.txtTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtTime.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTime.Location = new System.Drawing.Point(199, 34);
+            this.txtTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTime.Name = "txtTime";
+            this.txtTime.ReadOnly = true;
+            this.txtTime.Size = new System.Drawing.Size(143, 15);
+            this.txtTime.TabIndex = 13;
+            // 
+            // txtDate
+            // 
+            this.txtDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDate.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDate.Location = new System.Drawing.Point(199, 67);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.ReadOnly = true;
+            this.txtDate.Size = new System.Drawing.Size(143, 15);
+            this.txtDate.TabIndex = 14;
+            // 
+            // txtHigh
+            // 
+            this.txtHigh.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHigh.Location = new System.Drawing.Point(199, 100);
+            this.txtHigh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtHigh.Name = "txtHigh";
+            this.txtHigh.ReadOnly = true;
+            this.txtHigh.Size = new System.Drawing.Size(143, 15);
+            this.txtHigh.TabIndex = 15;
+            // 
+            // txtPredicted
+            // 
+            this.txtPredicted.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPredicted.Location = new System.Drawing.Point(199, 167);
+            this.txtPredicted.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPredicted.Name = "txtPredicted";
+            this.txtPredicted.ReadOnly = true;
+            this.txtPredicted.Size = new System.Drawing.Size(143, 15);
+            this.txtPredicted.TabIndex = 16;
+            // 
+            // txtOrderStatus
+            // 
+            this.txtOrderStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtOrderStatus.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrderStatus.Location = new System.Drawing.Point(200, 199);
+            this.txtOrderStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtOrderStatus.Name = "txtOrderStatus";
+            this.txtOrderStatus.ReadOnly = true;
+            this.txtOrderStatus.Size = new System.Drawing.Size(143, 15);
+            this.txtOrderStatus.TabIndex = 17;
+            // 
+            // txtLastVolume
+            // 
+            this.txtLastVolume.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLastVolume.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastVolume.Location = new System.Drawing.Point(495, 167);
+            this.txtLastVolume.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLastVolume.Name = "txtLastVolume";
+            this.txtLastVolume.ReadOnly = true;
+            this.txtLastVolume.Size = new System.Drawing.Size(143, 15);
+            this.txtLastVolume.TabIndex = 22;
+            // 
+            // txtLastOpen
+            // 
+            this.txtLastOpen.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLastOpen.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastOpen.Location = new System.Drawing.Point(495, 134);
+            this.txtLastOpen.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLastOpen.Name = "txtLastOpen";
+            this.txtLastOpen.ReadOnly = true;
+            this.txtLastOpen.Size = new System.Drawing.Size(143, 15);
+            this.txtLastOpen.TabIndex = 21;
+            // 
+            // txtLastLow
+            // 
+            this.txtLastLow.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLastLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastLow.Location = new System.Drawing.Point(495, 100);
+            this.txtLastLow.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLastLow.Name = "txtLastLow";
+            this.txtLastLow.ReadOnly = true;
+            this.txtLastLow.Size = new System.Drawing.Size(143, 15);
+            this.txtLastLow.TabIndex = 20;
+            // 
+            // txtLastHigh
+            // 
+            this.txtLastHigh.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLastHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastHigh.Location = new System.Drawing.Point(495, 67);
+            this.txtLastHigh.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLastHigh.Name = "txtLastHigh";
+            this.txtLastHigh.ReadOnly = true;
+            this.txtLastHigh.Size = new System.Drawing.Size(143, 15);
+            this.txtLastHigh.TabIndex = 19;
+            // 
+            // txtLastClose
+            // 
+            this.txtLastClose.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLastClose.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastClose.Location = new System.Drawing.Point(495, 34);
+            this.txtLastClose.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLastClose.Name = "txtLastClose";
+            this.txtLastClose.ReadOnly = true;
+            this.txtLastClose.Size = new System.Drawing.Size(143, 15);
+            this.txtLastClose.TabIndex = 18;
+            // 
+            // timerObservations
+            // 
+            this.timerObservations.Interval = 10;
+            this.timerObservations.Tick += new System.EventHandler(this.timerObservations_Tick);
+            // 
+            // txtLow
+            // 
+            this.txtLow.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLow.Location = new System.Drawing.Point(199, 134);
+            this.txtLow.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLow.Name = "txtLow";
+            this.txtLow.ReadOnly = true;
+            this.txtLow.Size = new System.Drawing.Size(143, 15);
+            this.txtLow.TabIndex = 24;
+            // 
+            // lblLow
+            // 
+            this.lblLow.AutoSize = true;
+            this.lblLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLow.ForeColor = System.Drawing.Color.Blue;
+            this.lblLow.Location = new System.Drawing.Point(10, 134);
+            this.lblLow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblLow.Name = "lblLow";
+            this.lblLow.Size = new System.Drawing.Size(40, 16);
+            this.lblLow.TabIndex = 23;
+            this.lblLow.Text = "Low:";
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(661, 295);
+            this.Controls.Add(this.txtLow);
+            this.Controls.Add(this.lblLow);
+            this.Controls.Add(this.txtLastVolume);
+            this.Controls.Add(this.txtLastOpen);
+            this.Controls.Add(this.txtLastLow);
+            this.Controls.Add(this.txtLastHigh);
+            this.Controls.Add(this.txtLastClose);
+            this.Controls.Add(this.txtOrderStatus);
+            this.Controls.Add(this.txtPredicted);
+            this.Controls.Add(this.txtHigh);
+            this.Controls.Add(this.txtDate);
+            this.Controls.Add(this.txtTime);
+            this.Controls.Add(this.lblOrderStatus);
+            this.Controls.Add(this.lblPredicted);
+            this.Controls.Add(this.lblLastVolume);
+            this.Controls.Add(this.lblLastOpen);
+            this.Controls.Add(this.lblLastLow);
+            this.Controls.Add(this.lblLastHigh);
+            this.Controls.Add(this.lblLastClose);
+            this.Controls.Add(this.lblHigh);
+            this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblNeedToConfigure);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMain";
@@ -202,6 +512,29 @@ namespace ProfitChartBotMLBased
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Label lblNeedToConfigure;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Label lblHigh;
+        private System.Windows.Forms.Label lblLastClose;
+        private System.Windows.Forms.Label lblLastHigh;
+        private System.Windows.Forms.Label lblLastLow;
+        private System.Windows.Forms.Label lblLastOpen;
+        private System.Windows.Forms.Label lblLastVolume;
+        private System.Windows.Forms.Label lblPredicted;
+        private System.Windows.Forms.Label lblOrderStatus;
+        private System.Windows.Forms.TextBox txtTime;
+        private System.Windows.Forms.TextBox txtDate;
+        private System.Windows.Forms.TextBox txtHigh;
+        private System.Windows.Forms.TextBox txtPredicted;
+        private System.Windows.Forms.TextBox txtOrderStatus;
+        private System.Windows.Forms.TextBox txtLastVolume;
+        private System.Windows.Forms.TextBox txtLastOpen;
+        private System.Windows.Forms.TextBox txtLastLow;
+        private System.Windows.Forms.TextBox txtLastHigh;
+        private System.Windows.Forms.TextBox txtLastClose;
+        private System.Windows.Forms.Timer timerObservations;
+        private System.Windows.Forms.TextBox txtLow;
+        private System.Windows.Forms.Label lblLow;
     }
 }
 

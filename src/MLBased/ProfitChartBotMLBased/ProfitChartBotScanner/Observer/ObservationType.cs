@@ -11,6 +11,7 @@ namespace ProfitChartBotScanner
         ReadingParameters = 0,
         ErrorInReadingParameters = 1,
         ParametersRead = 2,
-        RunningScanner = 3
+        RunningScanner = 3,
+        ScanResult = 4
     }
 }

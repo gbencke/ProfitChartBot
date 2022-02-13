@@ -17,6 +17,54 @@ namespace ProfitChartBotScanner
         private double? _ProfitChartLastLow = null;
         private double? _ProfitChartLastOpen = null;
         private double? _ProfitChartLastVolume = null;
+        private double? _Predicted = null;
+        private double? _DecisionBoundary = null;
+        private ProfitChartBotOrderStatus _OrderStatus = ProfitChartBotOrderStatus.Liquid;
+
+        public ProfitChartBotOrderStatus ProfitChartBotCurrentOrderStatus
+        {
+            get
+            {
+                return _OrderStatus;
+            }
+            set
+            {
+                _OrderStatus = value;
+            }
+        }
+        public String GetPredictedBoundary()
+        {
+            if (_Predicted.HasValue && _DecisionBoundary.HasValue)
+            {
+                return String.Format("{0}({1})", _Predicted.Value, _DecisionBoundary.Value);
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public double? Predicted
+        {
+            get
+            {
+                return _ProfitChartTime;
+            }
+            set
+            {
+                _Predicted = value;
+            }
+        }
+        public double? DecisionBoundary
+        {
+            get
+            {
+                return _DecisionBoundary;
+            }
+            set
+            {
+                _DecisionBoundary = value;
+            }
+        }
 
         public int? ProfitChartTime
         {
@@ -125,7 +173,14 @@ namespace ProfitChartBotScanner
                 }
                 if (fullToken.StartsWith("ProfitChartBotHigh"))
                 {
-                    _ProfitChartHigh = Convert.ToDouble(processedToken);
+                    if(processedToken.Length == 6)
+                    {
+                        _ProfitChartHigh = Convert.ToDouble(processedToken) / 100;
+                    }
+                    else
+                    {
+                        _ProfitChartHigh = Convert.ToDouble(processedToken);
+                    }
                 }
                 if (fullToken.StartsWith("ProfitChartBotLow"))
                 {
@@ -137,7 +192,14 @@ namespace ProfitChartBotScanner
                 }
                 if (fullToken.StartsWith("ProfitChartBotLastHigh"))
                 {
-                    _ProfitChartLastHigh = Convert.ToDouble(processedToken);
+                    if(processedToken.Length == 6)
+                    {
+                        _ProfitChartLastHigh = Convert.ToDouble(processedToken) / 100;
+                    }
+                    else
+                    {
+                        _ProfitChartLastHigh = Convert.ToDouble(processedToken);
+                    }
                 }
                 if (fullToken.StartsWith("ProfitChartBotLastLow") || fullToken.ToUpper().Contains("LastLow".ToUpper()))
                 {
@@ -169,59 +231,28 @@ namespace ProfitChartBotScanner
                     _ProfitChartLastVolume.HasValue;
             }
         }
-        public static bool operator ==(ProfitChartScanResult a, ProfitChartScanResult b)
+        public override bool Equals(object obj)
         {
-            if (a is null || b is null)
+            if (!(obj is ProfitChartScanResult))
             {
                 return false;
             }
 
-            if (!(a.IsDataOk && b.IsDataOk))
-            {
-                return false;
-            }
+            var b = (ProfitChartScanResult)obj;
 
-            if (a.ProfitChartDate.Value == b.ProfitChartDate.Value &&
-                a.ProfitChartTime.Value == b.ProfitChartTime.Value &&
-                a.ProfitChartHigh.Value == b.ProfitChartHigh.Value &&
-                a.ProfitChartLow.Value == b.ProfitChartLow.Value &&
-                a.ProfitChartLastClose.Value == b.ProfitChartLastClose.Value &&
-                a.ProfitChartLastHigh.Value == b.ProfitChartLastHigh.Value &&
-                a.ProfitChartLastLow.Value == b.ProfitChartLastLow.Value &&
-                a.ProfitChartLastOpen.Value == b.ProfitChartLastOpen.Value &&
-                a.ProfitChartLastVolume.Value == b.ProfitChartLastVolume.Value)
-            {
-                return true;
-            }
-            return false;
+            return this.ProfitChartDate.Value == b.ProfitChartDate.Value &&
+                this.ProfitChartTime.Value == b.ProfitChartTime.Value &&
+                this.ProfitChartHigh.Value == b.ProfitChartHigh.Value &&
+                this.ProfitChartLow.Value == b.ProfitChartLow.Value &&
+                this.ProfitChartLastClose.Value == b.ProfitChartLastClose.Value &&
+                this.ProfitChartLastHigh.Value == b.ProfitChartLastHigh.Value &&
+                this.ProfitChartLastLow.Value == b.ProfitChartLastLow.Value &&
+                this.ProfitChartLastOpen.Value == b.ProfitChartLastOpen.Value &&
+                this.ProfitChartLastVolume.Value == b.ProfitChartLastVolume.Value;
         }
-        public static bool operator !=(ProfitChartScanResult a, ProfitChartScanResult b)
+        public override int GetHashCode()
         {
-            if (a is null || b is null)
-            {
-                return true;
-            }
-
-            if (!(a.IsDataOk && b.IsDataOk))
-            {
-                return false;
-            }
-
-            if (!(a.ProfitChartDate.Value == b.ProfitChartDate.Value &&
-                a.ProfitChartTime.Value == b.ProfitChartTime.Value &&
-                a.ProfitChartHigh.Value == b.ProfitChartHigh.Value &&
-                a.ProfitChartLow.Value == b.ProfitChartLow.Value &&
-                a.ProfitChartLastClose.Value == b.ProfitChartLastClose.Value &&
-                a.ProfitChartLastHigh.Value == b.ProfitChartLastHigh.Value &&
-                a.ProfitChartLastLow.Value == b.ProfitChartLastLow.Value &&
-                a.ProfitChartLastOpen.Value == b.ProfitChartLastOpen.Value &&
-                a.ProfitChartLastVolume.Value == b.ProfitChartLastVolume.Value))
-            {
-                return true;
-            }
-
-            return false;
-
+            return base.GetHashCode();
         }
 
     }

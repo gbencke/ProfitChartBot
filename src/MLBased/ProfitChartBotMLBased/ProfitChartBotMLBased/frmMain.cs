@@ -34,6 +34,7 @@ namespace ProfitChartBotMLBased
 
         private void configuraçõesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             try
             {
                 var frm = new frmConfigure(_configuration);
@@ -49,7 +50,8 @@ namespace ProfitChartBotMLBased
 
                 RefreshControls();
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -68,7 +70,6 @@ namespace ProfitChartBotMLBased
         private void ShowExecutionControls()
         {
 
-
         }
         private void ShowNeedToConfigureWarning()
         {
@@ -80,11 +81,11 @@ namespace ProfitChartBotMLBased
         {
             HideAllControls();
 
-            if(_configuration == null || !_configuration.IsDataComplete())
+            if (_configuration == null || !_configuration.IsDataComplete())
             {
                 ShowNeedToConfigureWarning();
             }
-            else 
+            else
             {
                 ShowExecutionControls();
             }
@@ -131,17 +132,71 @@ namespace ProfitChartBotMLBased
                     RefreshControls();
                 }
 
+                string fullTmpLogPath = (new FileInfo(_configuration.TextLogDir)).FullName;
+                string LogFile = (new FileInfo(_configuration.TextLogDir + "\\" + (DateTime.Now).ToString("yyMMddhhmmss") + ".txt").FullName);
 
-            }catch(Exception ex)
+                ProfitChartScannerLogging.InitializeLogger(LogFile);
+
+                ProfitChartScannerLogging.Info("Initialized ProfitChartBot");
+
+                timerObservations.Enabled = true;
+                this.Focus();
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
+        private List<Observation> _Events = new List<Observation>();
+
         public void Observe(Observation Observed)
         {
-            statusStrip1.Items[0].Text = Observed.Message;
+            lock (this)
+            {
+                _Events.Add(Observed);
+            }
+        }
+
+        private void timerObservations_Tick(object sender, EventArgs e)
+        {
+            lock (this)
+            {
+                try
+                {
+                    foreach (var Observed in _Events)
+                    {
+                        if (Observed.Type == ObservationType.ScanResult)
+                        {
+                            txtDate.Text = Observed.Result.ProfitChartDate.ToString();
+                            txtTime.Text = Observed.Result.ProfitChartTime.ToString();
+                            txtLow.Text = Observed.Result.ProfitChartLow.ToString();
+                            txtHigh.Text = Observed.Result.ProfitChartHigh.ToString();
+                            txtLastClose.Text = Observed.Result.ProfitChartLastClose.ToString();
+                            txtLastHigh.Text = Observed.Result.ProfitChartLastHigh.ToString();
+                            txtLastLow.Text = Observed.Result.ProfitChartLastLow.ToString();
+                            txtLastOpen.Text = Observed.Result.ProfitChartLastOpen.ToString();
+                            txtLastVolume.Text = Observed.Result.ProfitChartLastVolume.ToString();
+                            txtOrderStatus.Text = Observed.Result.ProfitChartBotCurrentOrderStatus.ToString();
+                            txtPredicted.Text = Observed.Result.GetPredictedBoundary();
+                            this.Focus();
+                        }
+
+                        if (!String.IsNullOrEmpty(Observed.Message))
+                        {
+                            statusStrip1.Items[0].Text = Observed.Message;
+                        }
+                    }
+                    _Events.Clear();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
         }
     }
 }

@@ -11,6 +11,15 @@ namespace ProfitChartBotScanner
 
         private ObservationType _Type;
         private string _Message;
+        private ProfitChartScanResult _ScanResult;
+
+        public ProfitChartScanResult Result
+        {
+            get
+            {
+                return _ScanResult;
+            }
+        }
 
         public ObservationType Type
         {
@@ -28,10 +37,17 @@ namespace ProfitChartBotScanner
             }
         }
 
-        public Observation(ObservationType type , string Message)
+        public Observation(ObservationType type , string Message) 
         {
             _Type = type;
             _Message = Message;
+        }
+
+        public Observation(ObservationType type, ProfitChartScanResult ScanResult)
+        {
+            _Type = type;
+            _Message = Message;
+            _ScanResult = ScanResult;
         }
 
     }
