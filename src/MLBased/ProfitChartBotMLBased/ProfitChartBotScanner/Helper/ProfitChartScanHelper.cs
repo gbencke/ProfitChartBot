@@ -7,56 +7,23 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
-using System.IO;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using Emgu.CV.CvEnum;
 
 namespace ProfitChartBotScanner
 {
     public class ProfitChartScanHelper
     {
         private ProfitChartBotMLBasedConfiguration _configuration;
+        private ModelParameters _model;
 
         private string _tmpImagePath = null;
         private string _lastImagePath = null;
         private string _tesseractLastDataReceived = null;
-            
+
         private bool IsSameAsOld(string img1, string img2)
         {
-            using(var emgu_img1 = new Image<Bgr, Byte>(img1)){
-                using(var emgu_img2 = new Image<Bgr, Byte>(img2)){
-                    byte[,,] data1 = emgu_img1.Data;
-                    long sumValues1 = 0;
-
-                    for(var x=0; x< data1.GetUpperBound(0); x++)
-                    {
-                        for (var y = 0; y < data1.GetUpperBound(1); y++)
-                        {
-                            for (var z = 0; z < data1.GetUpperBound(2); z++)
-                            {
-                                sumValues1 += data1[x, y, z];
-                            }
-                        }
-                    }
-
-                    byte[,,] data2 = emgu_img2.Data;
-                    long sumValues2 = 0;
-
-                    for(var x=0; x< data2.GetUpperBound(0); x++)
-                    {
-                        for (var y = 0; y < data2.GetUpperBound(1); y++)
-                        {
-                            for (var z = 0; z < data2.GetUpperBound(2); z++)
-                            {
-                                sumValues2 += data2[x, y, z];
-                            }
-                        }
-                    }
-
-                    return sumValues1 == sumValues2;
-                }
-            }
+            return false;
         }
 
         private string getOCRFromTesseract()
