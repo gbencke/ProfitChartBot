@@ -469,7 +469,7 @@ namespace ProfitChartBotMLBased
             this.lblScanTime.Name = "lblScanTime";
             this.lblScanTime.Size = new System.Drawing.Size(88, 16);
             this.lblScanTime.TabIndex = 25;
-            this.lblScanTime.Text = "Scan Time:";
+            this.lblScanTime.Text = "Last Scan:";
             // 
             // frmMain
             // 
