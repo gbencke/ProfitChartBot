@@ -9,6 +9,7 @@ namespace ProfitChartBotScanner
 {
     public class ProfitChartBotScannerService : IProfitChartBotScannerService
     {
+        private const int APITimeOut = 30000;
         private ProfitChartBotScannerStatus _ProfitChartBotState = ProfitChartBotScannerStatus.NonInitialized;
         private IObserverProfitChartBotScanner _Observer;
         private ModelParameters _ModelParameters;
@@ -35,7 +36,7 @@ namespace ProfitChartBotScanner
 
                 try
                 {
-                    _ModelParameters = HTTPHelper.GetParameters(URL, 30000);
+                    _ModelParameters = HTTPHelper.GetParameters(URL, APITimeOut);
                     _Observer.Observe(new Observation(ObservationType.ParametersRead, "Parametros do Modelo foram lidos do Servidor..."));
                     _ProfitChartBotState = ProfitChartBotScannerStatus.ParametersReceived;
                 }
@@ -98,20 +99,32 @@ namespace ProfitChartBotScanner
                     ProfitChartScannerLogging.LogResult(nextResult);
                     _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult));
 
-                    if (!(_lastResult is null) && _lastResult.Equals(nextResult))
+                    if ((!(_lastResult is null)) && _lastResult.Equals(nextResult))
                     {
                         continue;
                     }
 
-                    if(!(_lastResult is null) && _lastResult.ProfitChartTime == nextResult.ProfitChartTime)
+                    // Stop Handling
+
+                    if((!(_lastResult is null)) && _lastResult.ProfitChartTime == nextResult.ProfitChartTime)
                     {
                         continue;
                     }
+
+                    // Next Quote Handling
 
                     ProfitChartScannerLogging.Debug("Posting:");
                     ProfitChartScannerLogging.LogResult(nextResult);
 
-                    HTTPHelper.PostQuote(_configuration.POSTQuoteURL, new QuoteToPost(nextResult), 30000);
+                    HTTPHelper.PostQuote(_configuration.POSTQuoteURL, new QuoteToPost(nextResult), APITimeOut);
+
+                    var Decision = HTTPHelper.GetSignal(_configuration.GETPredictionURL,
+                        _ModelParameters.CurrentExchange,
+                        _ModelParameters.CurrentAsset,
+                        _ModelParameters.CurrentTimeFrame,
+                        nextResult.ProfitChartRealDate.Value.ToString(),
+                        nextResult.ProfitChartRealTime.Value.ToString(),
+                        APITimeOut);
 
                     _lastResult = nextResult;
                 }

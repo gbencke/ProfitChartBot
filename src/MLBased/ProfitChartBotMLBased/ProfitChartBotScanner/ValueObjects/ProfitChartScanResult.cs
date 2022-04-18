@@ -14,6 +14,7 @@ namespace ProfitChartBotScanner
         private int? _ProfitChartTime = null;
         private int? _ProfitChartRealTime = null;
         private int? _ProfitChartDate = null;
+        private int? _ProfitChartRealDate = null;
         private double? _ProfitChartHigh = null;
         private double? _ProfitChartLow = null;
         private double? _ProfitChartLastClose = null;
@@ -125,6 +126,13 @@ namespace ProfitChartBotScanner
             get
             {
                 return _ProfitChartDate;
+            }
+        }
+        public int? ProfitChartRealDate
+        {
+            get
+            {
+                return _ProfitChartRealDate;
             }
         }
         public double? ProfitChartHigh
@@ -239,6 +247,8 @@ namespace ProfitChartBotScanner
                 {
                     processedToken = processedToken.Replace(".00", "");
                     _ProfitChartDate = Convert.ToInt32(processedToken);
+
+                    _ProfitChartRealDate = ((_ProfitChartDate.Value - 1000000) + 20000000);
                 }
                 if (fullToken.StartsWith("ProfitChartBotHigh"))
                 {
