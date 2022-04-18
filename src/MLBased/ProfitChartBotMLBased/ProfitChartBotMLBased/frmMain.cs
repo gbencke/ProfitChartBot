@@ -171,16 +171,17 @@ namespace ProfitChartBotMLBased
                         if (Observed.Type == ObservationType.ScanResult)
                         {
                             txtDate.Text = Observed.Result.ProfitChartDate.ToString();
-                            txtTime.Text = Observed.Result.ProfitChartTime.ToString();
-                            txtLow.Text = Observed.Result.ProfitChartLow.ToString();
-                            txtHigh.Text = Observed.Result.ProfitChartHigh.ToString();
-                            txtLastClose.Text = Observed.Result.ProfitChartLastClose.ToString();
-                            txtLastHigh.Text = Observed.Result.ProfitChartLastHigh.ToString();
-                            txtLastLow.Text = Observed.Result.ProfitChartLastLow.ToString();
-                            txtLastOpen.Text = Observed.Result.ProfitChartLastOpen.ToString();
-                            txtLastVolume.Text = Observed.Result.ProfitChartLastVolume.ToString();
+                            txtTime.Text = Observed.Result.ProfitChartTime + "(" + Observed.Result.ProfitChartRealTime.ToString() + ")";
+                            txtLow.Text = Observed.Result.ProfitChartLow.Value.ToString("0.00");
+                            txtHigh.Text = Observed.Result.ProfitChartHigh.Value.ToString("0.00");
+                            txtLastClose.Text = Observed.Result.ProfitChartLastClose.Value.ToString("0.00");
+                            txtLastHigh.Text = Observed.Result.ProfitChartLastHigh.Value.ToString("0.00");
+                            txtLastLow.Text = Observed.Result.ProfitChartLastLow.Value.ToString("0.00");
+                            txtLastOpen.Text = Observed.Result.ProfitChartLastOpen.Value.ToString("0.00");
+                            txtLastVolume.Text = Observed.Result.ProfitChartLastVolume.Value.ToString("0.00");
                             txtOrderStatus.Text = Observed.Result.ProfitChartBotCurrentOrderStatus.ToString();
                             txtPredicted.Text = Observed.Result.GetPredictedBoundary();
+                            txtScanTime.Text = Observed.Result.ScanResultTime.ToString("hh:mm:ss.fff");
                             this.Focus();
                         }
 
@@ -197,6 +198,11 @@ namespace ProfitChartBotMLBased
                 }
             }
 
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
