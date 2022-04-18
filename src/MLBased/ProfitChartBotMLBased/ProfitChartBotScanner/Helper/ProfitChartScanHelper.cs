@@ -58,19 +58,22 @@ namespace ProfitChartBotScanner
         private string MoveTmpImageToImageLog()
         {
             string fullTmpImagePath = (new FileInfo(_tmpImagePath)).FullName;
-            string newImageName = (new FileInfo(_configuration.ImageLogDir + "\\" + (DateTime.Now).ToString("yyMMddhhmmss") + ".png").FullName);
+            string newImageName = (new FileInfo(_configuration.ImageLogDir + "\\" + (DateTime.Now).ToString("yyMMddhhmmssfff") + ".png").FullName);
 
-            File.Move(fullTmpImagePath, newImageName);
+            if (!File.Exists(newImageName))
+            {
+                File.Move(fullTmpImagePath, newImageName);
+            }
 
             return newImageName;
         }
 
-        public ProfitChartScanResult GetNextScan()
+        public ProfitChartScanResult GetNextScan(int CurrentOffset)
         {
 
             Rectangle rect = new Rectangle(
                 _configuration.IndicatorsRegion.X,
-                _configuration.IndicatorsRegion.Y,
+                _configuration.IndicatorsRegion.Y + CurrentOffset,
                 _configuration.IndicatorsRegion.Width,
                 _configuration.IndicatorsRegion.Height);
 
@@ -84,7 +87,7 @@ namespace ProfitChartBotScanner
                 }
             }
 
-            if (!String.IsNullOrEmpty(_lastImagePath) && 
+            if (!String.IsNullOrEmpty(_lastImagePath) &&
                 IsSameAsOld(_lastImagePath, _tmpImagePath))
             {
                 return null;
@@ -96,7 +99,7 @@ namespace ProfitChartBotScanner
             }
 
 
-            var ret =  new ProfitChartScanResult(_tesseractLastDataReceived);
+            var ret = new ProfitChartScanResult(_model.CurrentExchange, _model.CurrentAsset, _model.CurrentTimeFrame, _tesseractLastDataReceived);
 
             if (ret.IsDataOk)
             {
@@ -109,8 +112,9 @@ namespace ProfitChartBotScanner
             }
         }
 
-        public ProfitChartScanHelper(ProfitChartBotMLBasedConfiguration configuration)
+        public ProfitChartScanHelper(ProfitChartBotMLBasedConfiguration configuration, ModelParameters model)
         {
+            _model = model;
             _configuration = configuration;
             _tmpImagePath = _configuration.ImageLogDir + "\\profit_tmp.png";
         }

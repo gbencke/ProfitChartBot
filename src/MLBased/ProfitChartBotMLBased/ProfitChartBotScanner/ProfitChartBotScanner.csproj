@@ -84,9 +84,11 @@
     <Compile Include="Services\IProfitChartBotScannerService.cs" />
     <Compile Include="ValueObjects\ModelParameters.cs" />
     <Compile Include="ValueObjects\ProfitChartScanResult.cs" />
+    <Compile Include="ValueObjects\QuoteToPost.cs" />
     <Compile Include="ValueObjects\ScreenPoint.cs" />
     <Compile Include="ValueObjects\ScreenRectangle.cs" />
     <Compile Include="ValueObjects\ProfitChartBotMLBasedConfiguration.cs" />
+    <Compile Include="ValueObjects\SignalPrediction.cs" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="cvextern.lib">

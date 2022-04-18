@@ -50,29 +50,69 @@ namespace ProfitChartBotScanner
             ReceiveParametersThread.Start();
         }
 
+        private int MinCaptureOffset = -10;
+        private int MaxCaptureOffset = 10;
+        private int CurrentOffset = 0;
+
         public void ExecuteScanning()
         {
+            ProfitChartBotOrderStatus _currentStatus = ProfitChartBotOrderStatus.Liquid;
             ProfitChartScanResult _lastResult = null;
 
             _Observer.Observe(new Observation(ObservationType.RunningScanner, "Running the Scanning for ProfitChart"));
             _ProfitChartBotState = ProfitChartBotScannerStatus.Running;
-            _scanner = new ProfitChartScanHelper(_configuration);
+            _scanner = new ProfitChartScanHelper(_configuration, _ModelParameters);
+
+        
 
             while (_ShouldRun)
             {
                 Thread.Sleep(_configuration.IntervalScanning.Value);
 
-                ProfitChartScanResult nextResult = _scanner.GetNextScan();
+                ProfitChartScanResult nextResult = _scanner.GetNextScan(CurrentOffset);
+                if(nextResult == null)
+                {
+                    ProfitChartScannerLogging.Debug(String.Format("Error in Scanning the Data..."));
+
+                    for(int _currentOffset = MinCaptureOffset;_currentOffset <= MaxCaptureOffset; _currentOffset++)
+                    {
+                        CurrentOffset = _currentOffset;
+                        nextResult = _scanner.GetNextScan(CurrentOffset);
+                        if(nextResult != null)
+                        {
+                            ProfitChartScannerLogging.Debug(String.Format("Current Offset:{0}", CurrentOffset));
+                            break; 
+                        }
+                    }
+
+                    if(nextResult == null)
+                    {
+                        ProfitChartScannerLogging.Debug("Error in Scanning the Data...");
+                        continue;
+                    }
+
+                }
 
                 if (!(nextResult is null))
                 {
+                    ProfitChartScannerLogging.LogResult(nextResult);
+                    _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult));
+
                     if (!(_lastResult is null) && _lastResult.Equals(nextResult))
                     {
                         continue;
                     }
 
+                    if(!(_lastResult is null) && _lastResult.ProfitChartTime == nextResult.ProfitChartTime)
+                    {
+                        continue;
+                    }
+
+                    ProfitChartScannerLogging.Debug("Posting:");
                     ProfitChartScannerLogging.LogResult(nextResult);
-                    _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult));
+
+                    HTTPHelper.PostQuote(_configuration.POSTQuoteURL, new QuoteToPost(nextResult), 30000);
+
                     _lastResult = nextResult;
                 }
 

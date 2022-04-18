@@ -8,7 +8,11 @@ namespace ProfitChartBotScanner
 {
     public class ProfitChartScanResult
     {
+        private string _Exchange = null;
+        private string _Asset = null;
+        private string _TimeFrame = null;
         private int? _ProfitChartTime = null;
+        private int? _ProfitChartRealTime = null;
         private int? _ProfitChartDate = null;
         private double? _ProfitChartHigh = null;
         private double? _ProfitChartLow = null;
@@ -20,6 +24,40 @@ namespace ProfitChartBotScanner
         private double? _Predicted = null;
         private double? _DecisionBoundary = null;
         private ProfitChartBotOrderStatus _OrderStatus = ProfitChartBotOrderStatus.Liquid;
+        private DateTime _ScanResultTime = DateTime.Now;
+        public string Exchange
+        {
+            get
+            {
+                return _Exchange;
+            }
+            set
+            {
+                _Exchange = value;
+            }
+        }
+        public string Asset
+        {
+            get
+            {
+                return _Asset;
+            }
+            set
+            {
+                _Asset = value;
+            }
+        }
+        public string TimeFrame
+        {
+            get
+            {
+                return _TimeFrame;
+            }
+            set
+            {
+                _TimeFrame = value;
+            }
+        }
 
         public ProfitChartBotOrderStatus ProfitChartBotCurrentOrderStatus
         {
@@ -54,6 +92,7 @@ namespace ProfitChartBotScanner
                 _Predicted = value;
             }
         }
+
         public double? DecisionBoundary
         {
             get
@@ -73,6 +112,14 @@ namespace ProfitChartBotScanner
                 return _ProfitChartTime;
             }
         }
+        public int? ProfitChartRealTime
+        {
+            get
+            {
+                return _ProfitChartRealTime;
+            }
+        }
+
         public int? ProfitChartDate
         {
             get
@@ -131,6 +178,13 @@ namespace ProfitChartBotScanner
                 return _ProfitChartLastVolume;
             }
         }
+        public DateTime ScanResultTime
+        {
+            get
+            {
+                return _ScanResultTime;
+            }
+        }
 
         private string CleanString(string toClean)
         {
@@ -150,9 +204,13 @@ namespace ProfitChartBotScanner
             return ret;
         }
 
-        public ProfitChartScanResult(string ResultFromTesseract)
+        public ProfitChartScanResult(string exchange, string asset, string TimeFrame, string ResultFromTesseract)
         {
             var tokens = ResultFromTesseract.Split('\n');
+
+            _Exchange = exchange;
+            _Asset = asset;
+            _TimeFrame = TimeFrame;
 
             foreach (var currentToken in tokens)
             {
@@ -165,6 +223,17 @@ namespace ProfitChartBotScanner
                 {
                     processedToken = processedToken.Replace(".00", "");
                     _ProfitChartTime = Convert.ToInt32(processedToken);
+
+                    var currentDateTime = DateTime.Now.ToString("yyyy-MM-dd") + 
+                        "T" + 
+                        (_ProfitChartTime.Value / 100).ToString("00") + 
+                        ":" + 
+                        (_ProfitChartTime.Value % 100).ToString("00");
+
+                    var correctedTime = DateTime.Parse(currentDateTime).Subtract(TimeSpan.FromMinutes(5));
+
+                    _ProfitChartRealTime = correctedTime.Hour * 100 + correctedTime.Minute;
+
                 }
                 if (fullToken.StartsWith("ProfitChartBotDate"))
                 {
