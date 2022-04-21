@@ -53,12 +53,12 @@ namespace ProfitChartBotMLBased
             this.lblLastLow = new System.Windows.Forms.Label();
             this.lblLastOpen = new System.Windows.Forms.Label();
             this.lblLastVolume = new System.Windows.Forms.Label();
-            this.lblPredicted = new System.Windows.Forms.Label();
+            this.lblShortPredicted = new System.Windows.Forms.Label();
             this.lblOrderStatus = new System.Windows.Forms.Label();
             this.txtTime = new System.Windows.Forms.TextBox();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.txtHigh = new System.Windows.Forms.TextBox();
-            this.txtPredicted = new System.Windows.Forms.TextBox();
+            this.txtShortPredicted = new System.Windows.Forms.TextBox();
             this.txtOrderStatus = new System.Windows.Forms.TextBox();
             this.txtLastVolume = new System.Windows.Forms.TextBox();
             this.txtLastOpen = new System.Windows.Forms.TextBox();
@@ -70,6 +70,8 @@ namespace ProfitChartBotMLBased
             this.lblLow = new System.Windows.Forms.Label();
             this.txtScanTime = new System.Windows.Forms.TextBox();
             this.lblScanTime = new System.Windows.Forms.Label();
+            this.txtLongPredicted = new System.Windows.Forms.TextBox();
+            this.longPredicted = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -164,7 +166,7 @@ namespace ProfitChartBotMLBased
             this.statusStrip1.BackColor = System.Drawing.Color.Transparent;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 273);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 308);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
             this.statusStrip1.Size = new System.Drawing.Size(661, 22);
@@ -183,7 +185,7 @@ namespace ProfitChartBotMLBased
             this.lblNeedToConfigure.AutoSize = true;
             this.lblNeedToConfigure.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNeedToConfigure.ForeColor = System.Drawing.Color.Red;
-            this.lblNeedToConfigure.Location = new System.Drawing.Point(10, 236);
+            this.lblNeedToConfigure.Location = new System.Drawing.Point(10, 271);
             this.lblNeedToConfigure.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNeedToConfigure.Name = "lblNeedToConfigure";
             this.lblNeedToConfigure.Size = new System.Drawing.Size(496, 16);
@@ -195,7 +197,7 @@ namespace ProfitChartBotMLBased
             this.lblTime.AutoSize = true;
             this.lblTime.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTime.ForeColor = System.Drawing.Color.Blue;
-            this.lblTime.Location = new System.Drawing.Point(10, 31);
+            this.lblTime.Location = new System.Drawing.Point(13, 31);
             this.lblTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(160, 16);
@@ -207,7 +209,7 @@ namespace ProfitChartBotMLBased
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.ForeColor = System.Drawing.Color.Blue;
-            this.lblDate.Location = new System.Drawing.Point(10, 65);
+            this.lblDate.Location = new System.Drawing.Point(13, 65);
             this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(48, 16);
@@ -219,7 +221,7 @@ namespace ProfitChartBotMLBased
             this.lblHigh.AutoSize = true;
             this.lblHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHigh.ForeColor = System.Drawing.Color.Blue;
-            this.lblHigh.Location = new System.Drawing.Point(10, 100);
+            this.lblHigh.Location = new System.Drawing.Point(13, 100);
             this.lblHigh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHigh.Name = "lblHigh";
             this.lblHigh.Size = new System.Drawing.Size(48, 16);
@@ -286,24 +288,24 @@ namespace ProfitChartBotMLBased
             this.lblLastVolume.TabIndex = 10;
             this.lblLastVolume.Text = "Last Volume:";
             // 
-            // lblPredicted
+            // lblShortPredicted
             // 
-            this.lblPredicted.AutoSize = true;
-            this.lblPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPredicted.ForeColor = System.Drawing.Color.Blue;
-            this.lblPredicted.Location = new System.Drawing.Point(10, 166);
-            this.lblPredicted.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblPredicted.Name = "lblPredicted";
-            this.lblPredicted.Size = new System.Drawing.Size(168, 16);
-            this.lblPredicted.TabIndex = 11;
-            this.lblPredicted.Text = "Predicted(Boundary):";
+            this.lblShortPredicted.AutoSize = true;
+            this.lblShortPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShortPredicted.ForeColor = System.Drawing.Color.Blue;
+            this.lblShortPredicted.Location = new System.Drawing.Point(13, 166);
+            this.lblShortPredicted.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblShortPredicted.Name = "lblShortPredicted";
+            this.lblShortPredicted.Size = new System.Drawing.Size(136, 16);
+            this.lblShortPredicted.TabIndex = 11;
+            this.lblShortPredicted.Text = "Short Predicted:";
             // 
             // lblOrderStatus
             // 
             this.lblOrderStatus.AutoSize = true;
             this.lblOrderStatus.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOrderStatus.ForeColor = System.Drawing.Color.Blue;
-            this.lblOrderStatus.Location = new System.Drawing.Point(10, 200);
+            this.lblOrderStatus.Location = new System.Drawing.Point(13, 234);
             this.lblOrderStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOrderStatus.Name = "lblOrderStatus";
             this.lblOrderStatus.Size = new System.Drawing.Size(112, 16);
@@ -343,22 +345,22 @@ namespace ProfitChartBotMLBased
             this.txtHigh.Size = new System.Drawing.Size(143, 15);
             this.txtHigh.TabIndex = 15;
             // 
-            // txtPredicted
+            // txtShortPredicted
             // 
-            this.txtPredicted.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPredicted.Location = new System.Drawing.Point(199, 167);
-            this.txtPredicted.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPredicted.Name = "txtPredicted";
-            this.txtPredicted.ReadOnly = true;
-            this.txtPredicted.Size = new System.Drawing.Size(143, 15);
-            this.txtPredicted.TabIndex = 16;
+            this.txtShortPredicted.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtShortPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShortPredicted.Location = new System.Drawing.Point(199, 167);
+            this.txtShortPredicted.Margin = new System.Windows.Forms.Padding(4);
+            this.txtShortPredicted.Name = "txtShortPredicted";
+            this.txtShortPredicted.ReadOnly = true;
+            this.txtShortPredicted.Size = new System.Drawing.Size(143, 15);
+            this.txtShortPredicted.TabIndex = 16;
             // 
             // txtOrderStatus
             // 
             this.txtOrderStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtOrderStatus.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrderStatus.Location = new System.Drawing.Point(200, 199);
+            this.txtOrderStatus.Location = new System.Drawing.Point(200, 233);
             this.txtOrderStatus.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderStatus.Name = "txtOrderStatus";
             this.txtOrderStatus.ReadOnly = true;
@@ -441,7 +443,7 @@ namespace ProfitChartBotMLBased
             this.lblLow.AutoSize = true;
             this.lblLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLow.ForeColor = System.Drawing.Color.Blue;
-            this.lblLow.Location = new System.Drawing.Point(10, 134);
+            this.lblLow.Location = new System.Drawing.Point(13, 134);
             this.lblLow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLow.Name = "lblLow";
             this.lblLow.Size = new System.Drawing.Size(40, 16);
@@ -471,12 +473,37 @@ namespace ProfitChartBotMLBased
             this.lblScanTime.TabIndex = 25;
             this.lblScanTime.Text = "Last Scan:";
             // 
+            // txtLongPredicted
+            // 
+            this.txtLongPredicted.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLongPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLongPredicted.Location = new System.Drawing.Point(199, 201);
+            this.txtLongPredicted.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLongPredicted.Name = "txtLongPredicted";
+            this.txtLongPredicted.ReadOnly = true;
+            this.txtLongPredicted.Size = new System.Drawing.Size(143, 15);
+            this.txtLongPredicted.TabIndex = 28;
+            // 
+            // longPredicted
+            // 
+            this.longPredicted.AutoSize = true;
+            this.longPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.longPredicted.ForeColor = System.Drawing.Color.Blue;
+            this.longPredicted.Location = new System.Drawing.Point(13, 200);
+            this.longPredicted.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.longPredicted.Name = "longPredicted";
+            this.longPredicted.Size = new System.Drawing.Size(128, 16);
+            this.longPredicted.TabIndex = 27;
+            this.longPredicted.Text = "Long Predicted:";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(661, 295);
+            this.ClientSize = new System.Drawing.Size(661, 330);
+            this.Controls.Add(this.txtLongPredicted);
+            this.Controls.Add(this.longPredicted);
             this.Controls.Add(this.txtScanTime);
             this.Controls.Add(this.lblScanTime);
             this.Controls.Add(this.txtLow);
@@ -487,12 +514,12 @@ namespace ProfitChartBotMLBased
             this.Controls.Add(this.txtLastHigh);
             this.Controls.Add(this.txtLastClose);
             this.Controls.Add(this.txtOrderStatus);
-            this.Controls.Add(this.txtPredicted);
+            this.Controls.Add(this.txtShortPredicted);
             this.Controls.Add(this.txtHigh);
             this.Controls.Add(this.txtDate);
             this.Controls.Add(this.txtTime);
             this.Controls.Add(this.lblOrderStatus);
-            this.Controls.Add(this.lblPredicted);
+            this.Controls.Add(this.lblShortPredicted);
             this.Controls.Add(this.lblLastVolume);
             this.Controls.Add(this.lblLastOpen);
             this.Controls.Add(this.lblLastLow);
@@ -548,12 +575,12 @@ namespace ProfitChartBotMLBased
         private System.Windows.Forms.Label lblLastLow;
         private System.Windows.Forms.Label lblLastOpen;
         private System.Windows.Forms.Label lblLastVolume;
-        private System.Windows.Forms.Label lblPredicted;
+        private System.Windows.Forms.Label lblShortPredicted;
         private System.Windows.Forms.Label lblOrderStatus;
         private System.Windows.Forms.TextBox txtTime;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.TextBox txtHigh;
-        private System.Windows.Forms.TextBox txtPredicted;
+        private System.Windows.Forms.TextBox txtShortPredicted;
         private System.Windows.Forms.TextBox txtOrderStatus;
         private System.Windows.Forms.TextBox txtLastVolume;
         private System.Windows.Forms.TextBox txtLastOpen;
@@ -565,6 +592,8 @@ namespace ProfitChartBotMLBased
         private System.Windows.Forms.Label lblLow;
         private System.Windows.Forms.TextBox txtScanTime;
         private System.Windows.Forms.Label lblScanTime;
+        private System.Windows.Forms.TextBox txtLongPredicted;
+        private System.Windows.Forms.Label longPredicted;
     }
 }
 

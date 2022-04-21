@@ -15,7 +15,24 @@ namespace ProfitChartBotScanner
         private ModelParameters _ModelParameters;
         private ProfitChartScanHelper _scanner;
         private ProfitChartBotMLBasedConfiguration _configuration;
-        private bool _ShouldRun = false;
+        private ProfitChartClickHelper _clickHelper;
+
+        private Thread _scannerExecutionThread;
+        private bool _shouldRun = false;
+        private int _minCaptureOffset = -10;
+        private int _maxCaptureOffset = 10;
+        private int _currentOffset = 0;
+
+        private double? _longStop;
+        private double? _longGain;
+        private double? _shortStop;
+        private double? _shortGain;
+        public void StartExecution()
+        {
+            _shouldRun = true;
+            _scannerExecutionThread = new Thread(ExecuteScanning);
+            _scannerExecutionThread.Start();
+        }
 
         public void Initialize(ProfitChartBotMLBasedConfiguration configuration, IObserverProfitChartBotScanner observer)
         {
@@ -26,6 +43,7 @@ namespace ProfitChartBotScanner
 
             _Observer = observer;
             _configuration = configuration;
+            _clickHelper = new ProfitChartClickHelper(_configuration);
 
             var ReceiveParametersThread = new Thread(() =>
             {
@@ -51,9 +69,34 @@ namespace ProfitChartBotScanner
             ReceiveParametersThread.Start();
         }
 
-        private int MinCaptureOffset = -10;
-        private int MaxCaptureOffset = 10;
-        private int CurrentOffset = 0;
+        private ProfitChartScanResult GetNextScan()
+        {
+
+            ProfitChartScanResult nextResult = _scanner.GetNextScan(_currentOffset);
+            if (nextResult == null)
+            {
+                ProfitChartScannerLogging.Debug(String.Format("Error in Scanning the Data..."));
+
+                for (int currentOffset = _minCaptureOffset; currentOffset <= _maxCaptureOffset; currentOffset++)
+                {
+                    _currentOffset = currentOffset;
+                    nextResult = _scanner.GetNextScan(_currentOffset);
+                    if (nextResult != null)
+                    {
+                        ProfitChartScannerLogging.Debug(String.Format("Current Offset:{0}", _currentOffset));
+                        break;
+                    }
+                }
+
+                if (nextResult == null)
+                {
+                    ProfitChartScannerLogging.Debug("Error in Scanning the Data...");
+                }
+            }
+
+            return nextResult;
+        }
+
 
         public void ExecuteScanning()
         {
@@ -64,81 +107,154 @@ namespace ProfitChartBotScanner
             _ProfitChartBotState = ProfitChartBotScannerStatus.Running;
             _scanner = new ProfitChartScanHelper(_configuration, _ModelParameters);
 
-        
-
-            while (_ShouldRun)
+            while (_shouldRun)
             {
                 Thread.Sleep(_configuration.IntervalScanning.Value);
 
-                ProfitChartScanResult nextResult = _scanner.GetNextScan(CurrentOffset);
-                if(nextResult == null)
-                {
-                    ProfitChartScannerLogging.Debug(String.Format("Error in Scanning the Data..."));
-
-                    for(int _currentOffset = MinCaptureOffset;_currentOffset <= MaxCaptureOffset; _currentOffset++)
-                    {
-                        CurrentOffset = _currentOffset;
-                        nextResult = _scanner.GetNextScan(CurrentOffset);
-                        if(nextResult != null)
-                        {
-                            ProfitChartScannerLogging.Debug(String.Format("Current Offset:{0}", CurrentOffset));
-                            break; 
-                        }
-                    }
-
-                    if(nextResult == null)
-                    {
-                        ProfitChartScannerLogging.Debug("Error in Scanning the Data...");
-                        continue;
-                    }
-
-                }
+                var nextResult = GetNextScan();
 
                 if (!(nextResult is null))
                 {
-                    ProfitChartScannerLogging.LogResult(nextResult);
-                    _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult));
 
                     if ((!(_lastResult is null)) && _lastResult.Equals(nextResult))
                     {
                         continue;
                     }
 
+                    ProfitChartScannerLogging.LogResult(nextResult);
+                    _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+
                     // Stop Handling
 
-                    if((!(_lastResult is null)) && _lastResult.ProfitChartTime == nextResult.ProfitChartTime)
+                    if (_currentStatus == ProfitChartBotOrderStatus.Long && nextResult.ProfitChartLow.Value <= _longStop.Value)
                     {
-                        continue;
+                        _clickHelper.SendOpenCloseAllPositionsClick();
+                        ProfitChartScannerLogging.Debug("(Order)Stop for Long Position:Click Sent...");
+                        _longStop = null;
+                        _longGain = null;
+                        _currentStatus = ProfitChartBotOrderStatus.Liquid;
+                        _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+                    }
+                    if (_currentStatus == ProfitChartBotOrderStatus.Long && nextResult.ProfitChartHigh.Value >= _longGain.Value)
+                    {
+                        _clickHelper.SendOpenCloseAllPositionsClick();
+                        ProfitChartScannerLogging.Debug("(Order)Gain for Long Position:Click Sent...");
+                        _longStop = null;
+                        _longGain = null;
+                        _currentStatus = ProfitChartBotOrderStatus.Liquid;
+                        _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+                    }
+
+                    if (_currentStatus == ProfitChartBotOrderStatus.Short && nextResult.ProfitChartHigh.Value >= _shortStop.Value)
+                    {
+                        _clickHelper.SendOpenCloseAllPositionsClick();
+                        ProfitChartScannerLogging.Debug("(Order)Stop for Short Position:Click Sent...");
+                        _shortStop = null;
+                        _shortGain = null;
+                        _currentStatus = ProfitChartBotOrderStatus.Liquid;
+                        _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+                    }
+
+                    if (_currentStatus == ProfitChartBotOrderStatus.Short && nextResult.ProfitChartLow.Value <= _shortGain.Value)
+                    {
+                        _clickHelper.SendOpenCloseAllPositionsClick();
+                        ProfitChartScannerLogging.Debug("(Order)Gain for Short Position:Click Sent...");
+                        _shortStop = null;
+                        _shortGain = null;
+                        _currentStatus = ProfitChartBotOrderStatus.Liquid;
+                        _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
                     }
 
                     // Next Quote Handling
+
+                    if ((!(_lastResult is null)) && _lastResult.ProfitChartTime == nextResult.ProfitChartTime)
+                    {
+                        continue;
+                    }
 
                     ProfitChartScannerLogging.Debug("Posting:");
                     ProfitChartScannerLogging.LogResult(nextResult);
 
                     HTTPHelper.PostQuote(_configuration.POSTQuoteURL, new QuoteToPost(nextResult), APITimeOut);
 
-                    var Decision = HTTPHelper.GetSignal(_configuration.GETPredictionURL,
-                        _ModelParameters.CurrentExchange,
-                        _ModelParameters.CurrentAsset,
-                        _ModelParameters.CurrentTimeFrame,
-                        nextResult.ProfitChartRealDate.Value.ToString(),
-                        nextResult.ProfitChartRealTime.Value.ToString(),
-                        APITimeOut);
+                    if (nextResult.ProfitChartRealTime.Value >= _ModelParameters.MinimumTime &&
+                        nextResult.ProfitChartRealDate.Value >= _ModelParameters.MinimumDateTrade &&
+                        nextResult.ProfitChartRealTime.Value <= _ModelParameters.MaximumTime)
+                    {
+                        var Decision = HTTPHelper.GetSignal(_configuration.GETPredictionURL,
+                            _ModelParameters.CurrentExchange,
+                            _ModelParameters.CurrentAsset,
+                            _ModelParameters.CurrentTimeFrame,
+                            nextResult.ProfitChartRealDate.Value.ToString(),
+                            nextResult.ProfitChartRealTime.Value.ToString(),
+                            APITimeOut);
 
+                        ProfitChartScannerLogging.Debug(String.Format("(Predicted):Long ({0:0.000}), Short ({1:0.000}", Decision.LongPredict, Decision.ShortPredict));
+
+                        nextResult.LongPredicted = Decision.LongPredict;
+                        nextResult.ShortPredicted = Decision.ShortPredict;
+
+                        _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+
+                        if (_currentStatus == ProfitChartBotOrderStatus.Liquid)
+                        {
+
+                            if (Decision.LongPredict > Decision.ShortPredict &&
+                                Decision.LongPredict > _ModelParameters.DecisionBoundary)
+                            {
+                                _clickHelper.SendOpenLongPositionClick();
+                                _longStop = nextResult.ProfitChartLastClose.Value * (1 - (_ModelParameters.CurrentStop / 100));
+                                _longGain = nextResult.ProfitChartLastClose.Value * (1 + (_ModelParameters.CurrentTarget / 100));
+                                ProfitChartScannerLogging.Debug(String.Format("(Order)Start Long Position... Click Sent... Target:{0}, Stop:{1}", _longGain, _longStop));
+                                _currentStatus = ProfitChartBotOrderStatus.Long;
+                                _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+                            }
+
+                            if (Decision.ShortPredict > Decision.LongPredict &&
+                                Decision.ShortPredict > _ModelParameters.DecisionBoundary)
+                            {
+                                _clickHelper.SendOpenShortPositionClick();
+                                _shortStop = nextResult.ProfitChartLastClose.Value * (1 + (_ModelParameters.CurrentStop / 100));
+                                _shortGain = nextResult.ProfitChartLastClose.Value * (1 - (_ModelParameters.CurrentTarget / 100));
+                                ProfitChartScannerLogging.Debug(String.Format("(Order)Start Short Position... Click Sent... Target:{0}, Stop:{1}", _shortGain, _shortStop));
+                                _currentStatus = ProfitChartBotOrderStatus.Short;
+                                _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+                            }
+                        }
+
+                        if (_currentStatus == ProfitChartBotOrderStatus.Long)
+                        {
+                            if (Decision.ShortPredict > Decision.LongPredict &&
+                                Decision.ShortPredict > _ModelParameters.DecisionBoundary)
+                            {
+                                _clickHelper.SendOpenCloseAllPositionsClick();
+                                ProfitChartScannerLogging.Debug("(Order) Stop for Long Position:Click Sent...");
+                                _longStop = null;
+                                _longGain = null;
+                                _currentStatus = ProfitChartBotOrderStatus.Liquid;
+                                _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+                            }
+                        }
+
+                        if (_currentStatus == ProfitChartBotOrderStatus.Short)
+                        {
+                            if (Decision.LongPredict > Decision.ShortPredict &&
+                                Decision.LongPredict > _ModelParameters.DecisionBoundary)
+                            {
+                                _clickHelper.SendOpenCloseAllPositionsClick();
+                                ProfitChartScannerLogging.Debug("(Order) Stop for Short Position:Click Sent...");
+                                _shortStop = null;
+                                _shortGain = null;
+                                _currentStatus = ProfitChartBotOrderStatus.Liquid;
+                                _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
+                            }
+                        }
+                    }
                     _lastResult = nextResult;
                 }
-
             }
 
         }
 
-        Thread _scannerExecutionThread;
-        public void StartExecution()
-        {
-            _ShouldRun = true;
-            _scannerExecutionThread = new Thread(ExecuteScanning);
-            _scannerExecutionThread.Start();
-        }
     }
 }

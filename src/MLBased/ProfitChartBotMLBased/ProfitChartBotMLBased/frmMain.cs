@@ -179,8 +179,27 @@ namespace ProfitChartBotMLBased
                             txtLastLow.Text = Observed.Result.ProfitChartLastLow.Value.ToString("0.00");
                             txtLastOpen.Text = Observed.Result.ProfitChartLastOpen.Value.ToString("0.00");
                             txtLastVolume.Text = Observed.Result.ProfitChartLastVolume.Value.ToString("0.00");
-                            txtOrderStatus.Text = Observed.Result.ProfitChartBotCurrentOrderStatus.ToString();
-                            txtPredicted.Text = Observed.Result.GetPredictedBoundary();
+                            txtOrderStatus.Text = Observed.OrderStatus.ToString();
+
+                            if (Observed.Result.LongPredicted.HasValue)
+                            {
+                                txtLongPredicted.Text = String.Format("{0}:({1})",
+                                    Observed.Result.LongPredicted.Value.ToString("0.000"), 
+                                    Observed.Result.DecisionBoundary.Value.ToString("0.00"));
+                            }
+                            else
+                            {
+                            }
+                            if (Observed.Result.ShortPredicted.HasValue)
+                            {
+                                txtShortPredicted.Text = String.Format("{0}:({1})",
+                                    Observed.Result.ShortPredicted.Value.ToString("0.000"), 
+                                    Observed.Result.DecisionBoundary.Value.ToString("0.00"));
+                            }
+                            else
+                            {
+                            }
+
                             txtScanTime.Text = Observed.Result.ScanResultTime.ToString("hh:mm:ss.fff");
                             this.Focus();
                         }

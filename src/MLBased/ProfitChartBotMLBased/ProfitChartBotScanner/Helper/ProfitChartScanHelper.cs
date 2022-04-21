@@ -99,7 +99,7 @@ namespace ProfitChartBotScanner
             }
 
 
-            var ret = new ProfitChartScanResult(_model.CurrentExchange, _model.CurrentAsset, _model.CurrentTimeFrame, _tesseractLastDataReceived);
+            var ret = new ProfitChartScanResult(_model.DecisionBoundary, _model.CurrentExchange, _model.CurrentAsset, _model.CurrentTimeFrame, _tesseractLastDataReceived);
 
             if (ret.IsDataOk)
             {

@@ -62,6 +62,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,6 +75,7 @@
     <Compile Include="Enums\ProfitChartBotScannerStatus.cs" />
     <Compile Include="Exceptions\ProfitChartScannerInitializedException.cs" />
     <Compile Include="Helper\HTTPHelper.cs" />
+    <Compile Include="Helper\ProfitChartClickHelper.cs" />
     <Compile Include="Helper\ProfitChartScanHelper.cs" />
     <Compile Include="Helper\ProfitChartScannerLogging.cs" />
     <Compile Include="Observer\IObserverProfitChartBotScanner.cs" />
