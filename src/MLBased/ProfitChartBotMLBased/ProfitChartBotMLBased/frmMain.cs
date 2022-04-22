@@ -207,6 +207,10 @@ namespace ProfitChartBotMLBased
                         if (!String.IsNullOrEmpty(Observed.Message))
                         {
                             statusStrip1.Items[0].Text = Observed.Message;
+                            if(Observed.Type== ObservationType.ErrorInReadingParameters)
+                            {
+                                DisableAllControls();
+                            }
                         }
                     }
                     _Events.Clear();
@@ -217,6 +221,13 @@ namespace ProfitChartBotMLBased
                 }
             }
 
+        }
+
+        private void DisableAllControls()
+        {
+            this.runToolStripMenuItem.Enabled = false;
+            this.pauseToolStripMenuItem.Enabled = false;
+            this.executeToolStripMenuItem.Enabled = false;
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)

@@ -131,20 +131,20 @@ namespace ProfitChartBotMLBased
             // runToolStripMenuItem
             // 
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pauseToolStripMenuItem.Text = "Pause";
             // 
             // terminateToolStripMenuItem
             // 
             this.terminateToolStripMenuItem.Name = "terminateToolStripMenuItem";
-            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.terminateToolStripMenuItem.Text = "Terminate";
             // 
             // helpToolStripMenuItem
@@ -540,6 +540,7 @@ namespace ProfitChartBotMLBased
             this.MinimizeBox = false;
             this.Name = "frmMain";
             this.Text = "ProfitChartBot - Machine Learning Based";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);

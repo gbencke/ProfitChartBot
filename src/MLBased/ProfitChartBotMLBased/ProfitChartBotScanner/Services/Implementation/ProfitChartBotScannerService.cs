@@ -121,13 +121,13 @@ namespace ProfitChartBotScanner
                         continue;
                     }
 
-                    ProfitChartScannerLogging.LogResult(nextResult);
                     _Observer.Observe(new Observation(ObservationType.ScanResult, nextResult, _currentStatus));
 
                     // Stop Handling
 
                     if (_currentStatus == ProfitChartBotOrderStatus.Long && nextResult.ProfitChartLow.Value <= _longStop.Value)
                     {
+                        ProfitChartScannerLogging.LogResult(nextResult);
                         _clickHelper.SendOpenCloseAllPositionsClick();
                         ProfitChartScannerLogging.Debug("(Order)Stop for Long Position:Click Sent...");
                         _longStop = null;
@@ -137,6 +137,7 @@ namespace ProfitChartBotScanner
                     }
                     if (_currentStatus == ProfitChartBotOrderStatus.Long && nextResult.ProfitChartHigh.Value >= _longGain.Value)
                     {
+                        ProfitChartScannerLogging.LogResult(nextResult);
                         _clickHelper.SendOpenCloseAllPositionsClick();
                         ProfitChartScannerLogging.Debug("(Order)Gain for Long Position:Click Sent...");
                         _longStop = null;
@@ -147,6 +148,7 @@ namespace ProfitChartBotScanner
 
                     if (_currentStatus == ProfitChartBotOrderStatus.Short && nextResult.ProfitChartHigh.Value >= _shortStop.Value)
                     {
+                        ProfitChartScannerLogging.LogResult(nextResult);
                         _clickHelper.SendOpenCloseAllPositionsClick();
                         ProfitChartScannerLogging.Debug("(Order)Stop for Short Position:Click Sent...");
                         _shortStop = null;
@@ -157,6 +159,7 @@ namespace ProfitChartBotScanner
 
                     if (_currentStatus == ProfitChartBotOrderStatus.Short && nextResult.ProfitChartLow.Value <= _shortGain.Value)
                     {
+                        ProfitChartScannerLogging.LogResult(nextResult);
                         _clickHelper.SendOpenCloseAllPositionsClick();
                         ProfitChartScannerLogging.Debug("(Order)Gain for Short Position:Click Sent...");
                         _shortStop = null;
@@ -172,12 +175,16 @@ namespace ProfitChartBotScanner
                         continue;
                     }
 
-                    ProfitChartScannerLogging.Debug("Posting:");
-                    ProfitChartScannerLogging.LogResult(nextResult);
+                    if (nextResult.ProfitChartRealTime.Value <= _ModelParameters.MaximumTime &&
+                        nextResult.ProfitChartRealTime.Value >= 900)
+                    {
+                        ProfitChartScannerLogging.Debug("Posting:");
+                        ProfitChartScannerLogging.LogResult(nextResult);
+                        HTTPHelper.PostQuote(_configuration.POSTQuoteURL, new QuoteToPost(nextResult), APITimeOut);
+                    }
 
-                    HTTPHelper.PostQuote(_configuration.POSTQuoteURL, new QuoteToPost(nextResult), APITimeOut);
 
-                    if (nextResult.ProfitChartRealTime.Value >= _ModelParameters.MinimumTime &&
+                    if (nextResult.ProfitChartRealTime.Value > _ModelParameters.MinimumTime &&
                         nextResult.ProfitChartRealDate.Value >= _ModelParameters.MinimumDateTrade &&
                         nextResult.ProfitChartRealTime.Value <= _ModelParameters.MaximumTime)
                     {
@@ -189,7 +196,7 @@ namespace ProfitChartBotScanner
                             nextResult.ProfitChartRealTime.Value.ToString(),
                             APITimeOut);
 
-                        ProfitChartScannerLogging.Debug(String.Format("(Predicted):Long ({0:0.000}), Short ({1:0.000}", Decision.LongPredict, Decision.ShortPredict));
+                        ProfitChartScannerLogging.Debug(String.Format("(Predicted):Long ({0:0.000}), Short ({1:0.000})", Decision.LongPredict, Decision.ShortPredict));
 
                         nextResult.LongPredicted = Decision.LongPredict;
                         nextResult.ShortPredicted = Decision.ShortPredict;

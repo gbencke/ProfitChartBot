@@ -78,6 +78,9 @@ namespace ProfitChartBotScanner
             {
                 string CleanURL = URL.EndsWith("/") ? URL.Substring(0, URL.Length - 1) : URL;
                 string CorrectURL = String.Format("{0}/{1}/{2}/{3}/{4}/{5}/", CleanURL, Exchange, Asset, Timeframe, Date, Time);
+
+                ProfitChartScannerLogging.Debug(String.Format("Get Predict for:{0}", CorrectURL));
+
                 HttpWebRequest Request = (HttpWebRequest)HttpWebRequest.Create(CorrectURL);
 
                 Request.Timeout = Timeout;

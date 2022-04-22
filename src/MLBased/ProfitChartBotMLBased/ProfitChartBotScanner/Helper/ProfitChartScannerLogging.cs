@@ -63,7 +63,7 @@ namespace ProfitChartBotScanner
         public static void LogResult(ProfitChartScanResult result)
         {
             var str = String.Format("Time({0}), Date({1}), High({2}), Low({3}), LastClose({4}), LastHigh({5}), LastLow({6}), LastOpen({7}), LastVolume({8})",
-                result.ProfitChartTime.Value.ToString(),
+                result.ProfitChartRealTime.Value.ToString(),
                 result.ProfitChartDate.Value.ToString(),
                 result.ProfitChartHigh.Value.ToString(),
                 result.ProfitChartLow.Value.ToString(),
