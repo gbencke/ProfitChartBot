@@ -20,8 +20,8 @@ namespace ProfitChartBotScanner
         private Thread _scannerExecutionThread;
         private bool _shouldRun = false;
         private bool _useSmartStop = false;
-        private int _minCaptureOffset = -10;
-        private int _maxCaptureOffset = 10;
+        private int _minCaptureOffset = -30;
+        private int _maxCaptureOffset = 30;
         private int _currentOffset = 0;
 
         private double? _longStop;
@@ -79,7 +79,7 @@ namespace ProfitChartBotScanner
             {
                 ProfitChartScannerLogging.Debug(String.Format("Error in Scanning the Data..."));
 
-                for (int currentOffset = _minCaptureOffset; currentOffset <= _maxCaptureOffset; currentOffset++)
+                for (int currentOffset = _minCaptureOffset; currentOffset <= (_maxCaptureOffset * 2); currentOffset++)
                 {
                     _currentOffset = currentOffset;
                     nextResult = _scanner.GetNextScan(_currentOffset);

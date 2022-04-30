@@ -238,6 +238,10 @@ namespace ProfitChartBotScanner
                     {
                         processedToken = processedToken.Substring(0, 4);
                     }
+                    if (String.IsNullOrEmpty(processedToken))
+                    {
+                        return;
+                    }
                     _ProfitChartTime = Convert.ToInt32(processedToken);
 
                     var currentDateTime = DateTime.Now.ToString("yyyy-MM-dd") + 
