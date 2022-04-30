@@ -59,7 +59,13 @@ namespace ProfitChartBotMLBased
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _service.StartExecution();
+            try
+            {
+                _service.StartExecution();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.StackTrace);
+            }
         }
 
         private void HideAllControls()
