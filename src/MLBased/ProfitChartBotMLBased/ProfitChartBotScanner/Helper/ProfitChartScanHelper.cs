@@ -7,8 +7,6 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Diagnostics;
-using Emgu.CV;
-using Emgu.CV.Structure;
 
 namespace ProfitChartBotScanner
 {
