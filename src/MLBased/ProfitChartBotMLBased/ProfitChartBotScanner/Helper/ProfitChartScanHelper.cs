@@ -116,7 +116,14 @@ namespace ProfitChartBotScanner
         {
             _model = model;
             _configuration = configuration;
+
+            if (!Directory.Exists(_configuration.ImageLogDir))
+            {
+                Directory.CreateDirectory(_configuration.ImageLogDir);
+            }
+
             _tmpImagePath = _configuration.ImageLogDir + "\\profit_tmp.png";
+
         }
 
     }

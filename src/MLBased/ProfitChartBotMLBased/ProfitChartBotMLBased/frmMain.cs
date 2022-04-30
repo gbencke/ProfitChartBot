@@ -132,6 +132,17 @@ namespace ProfitChartBotMLBased
                     RefreshControls();
                 }
 
+                if (string.IsNullOrEmpty(_configuration.TextLogDir))
+                {
+
+                    _configuration.TextLogDir = ".\\logtext";
+
+                    if (!Directory.Exists(_configuration.TextLogDir))
+                    {
+                        Directory.CreateDirectory(_configuration.TextLogDir);
+                    }
+                }
+
                 string fullTmpLogPath = (new FileInfo(_configuration.TextLogDir)).FullName;
                 string LogFile = (new FileInfo(_configuration.TextLogDir + "\\" + (DateTime.Now).ToString("yyMMddhhmmss") + ".txt").FullName);
 
