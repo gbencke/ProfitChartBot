@@ -39,6 +39,7 @@ namespace ProfitChartBotMLBased
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMostrarRegiao";
             this.Text = "frmMostrarRegiao";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmMostrarRegiao_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMostrarRegiao_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMostrarRegiao_KeyDown);

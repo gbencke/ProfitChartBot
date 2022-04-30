@@ -46,7 +46,7 @@ namespace ProfitChartBotMLBased
                 }
 
                 _service = new ProfitChartBotScannerService();
-                _service.Initialize(_configuration, this);
+                _service.Initialize(_configuration, this, smartStopToolStripMenuItem.Checked);
 
                 RefreshControls();
 
@@ -120,7 +120,7 @@ namespace ProfitChartBotMLBased
                     }
 
                     _service = new ProfitChartBotScannerService();
-                    _service.Initialize(_configuration, this);
+                    _service.Initialize(_configuration, this, smartStopToolStripMenuItem.Checked);
 
                     RefreshControls();
 

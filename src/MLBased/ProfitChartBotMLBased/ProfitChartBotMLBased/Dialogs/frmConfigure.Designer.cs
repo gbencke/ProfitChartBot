@@ -472,7 +472,8 @@ namespace ProfitChartBotMLBased
             this.MinimizeBox = false;
             this.Name = "frmConfigure";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bot Configuration";
+            this.Text = "ProfitChartBot Configuration";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmConfigure_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

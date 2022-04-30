@@ -19,6 +19,7 @@ namespace ProfitChartBotScanner
 
         private Thread _scannerExecutionThread;
         private bool _shouldRun = false;
+        private bool _useSmartStop = false;
         private int _minCaptureOffset = -10;
         private int _maxCaptureOffset = 10;
         private int _currentOffset = 0;
@@ -34,13 +35,14 @@ namespace ProfitChartBotScanner
             _scannerExecutionThread.Start();
         }
 
-        public void Initialize(ProfitChartBotMLBasedConfiguration configuration, IObserverProfitChartBotScanner observer)
+        public void Initialize(ProfitChartBotMLBasedConfiguration configuration, IObserverProfitChartBotScanner observer, bool useSmartStop)
         {
             if (_ProfitChartBotState != ProfitChartBotScannerStatus.NonInitialized)
             {
                 throw new ProfitChartScannerInitializedException("Initialization has already been tried in this instance...");
             }
 
+            _useSmartStop = useSmartStop;
             _Observer = observer;
             _configuration = configuration;
             _clickHelper = new ProfitChartClickHelper(_configuration);
@@ -232,7 +234,8 @@ namespace ProfitChartBotScanner
                         if (_currentStatus == ProfitChartBotOrderStatus.Long)
                         {
                             if (Decision.ShortPredict > Decision.LongPredict &&
-                                Decision.ShortPredict > _ModelParameters.DecisionBoundary)
+                                Decision.ShortPredict > _ModelParameters.DecisionBoundary &&
+                                _useSmartStop)
                             {
                                 _clickHelper.SendOpenCloseAllPositionsClick();
                                 ProfitChartScannerLogging.Debug("(Order) Stop for Long Position:Click Sent...");
@@ -246,7 +249,8 @@ namespace ProfitChartBotScanner
                         if (_currentStatus == ProfitChartBotOrderStatus.Short)
                         {
                             if (Decision.LongPredict > Decision.ShortPredict &&
-                                Decision.LongPredict > _ModelParameters.DecisionBoundary)
+                                Decision.LongPredict > _ModelParameters.DecisionBoundary &&
+                                _useSmartStop)
                             {
                                 _clickHelper.SendOpenCloseAllPositionsClick();
                                 ProfitChartScannerLogging.Debug("(Order) Stop for Short Position:Click Sent...");

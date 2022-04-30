@@ -72,6 +72,8 @@ namespace ProfitChartBotMLBased
             this.lblScanTime = new System.Windows.Forms.Label();
             this.txtLongPredicted = new System.Windows.Forms.TextBox();
             this.longPredicted = new System.Windows.Forms.Label();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.smartStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -123,9 +125,11 @@ namespace ProfitChartBotMLBased
             this.executeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.runToolStripMenuItem,
             this.pauseToolStripMenuItem,
-            this.terminateToolStripMenuItem});
+            this.terminateToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.smartStopToolStripMenuItem});
             this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.executeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.executeToolStripMenuItem.Text = "Execute";
             // 
             // runToolStripMenuItem
@@ -183,139 +187,139 @@ namespace ProfitChartBotMLBased
             // lblNeedToConfigure
             // 
             this.lblNeedToConfigure.AutoSize = true;
-            this.lblNeedToConfigure.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNeedToConfigure.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNeedToConfigure.ForeColor = System.Drawing.Color.Red;
             this.lblNeedToConfigure.Location = new System.Drawing.Point(10, 271);
             this.lblNeedToConfigure.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNeedToConfigure.Name = "lblNeedToConfigure";
-            this.lblNeedToConfigure.Size = new System.Drawing.Size(496, 16);
+            this.lblNeedToConfigure.Size = new System.Drawing.Size(409, 16);
             this.lblNeedToConfigure.TabIndex = 2;
             this.lblNeedToConfigure.Text = "This Bot has no current Configuration, please configure it...";
             // 
             // lblTime
             // 
             this.lblTime.AutoSize = true;
-            this.lblTime.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTime.ForeColor = System.Drawing.Color.Blue;
             this.lblTime.Location = new System.Drawing.Point(13, 31);
             this.lblTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(160, 16);
+            this.lblTime.Size = new System.Drawing.Size(143, 16);
             this.lblTime.TabIndex = 3;
             this.lblTime.Text = "Time (Last Candle):";
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.ForeColor = System.Drawing.Color.Blue;
             this.lblDate.Location = new System.Drawing.Point(13, 65);
             this.lblDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(48, 16);
+            this.lblDate.Size = new System.Drawing.Size(45, 16);
             this.lblDate.TabIndex = 4;
             this.lblDate.Text = "Date:";
             // 
             // lblHigh
             // 
             this.lblHigh.AutoSize = true;
-            this.lblHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHigh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHigh.ForeColor = System.Drawing.Color.Blue;
             this.lblHigh.Location = new System.Drawing.Point(13, 100);
             this.lblHigh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHigh.Name = "lblHigh";
-            this.lblHigh.Size = new System.Drawing.Size(48, 16);
+            this.lblHigh.Size = new System.Drawing.Size(44, 16);
             this.lblHigh.TabIndex = 5;
             this.lblHigh.Text = "High:";
             // 
             // lblLastClose
             // 
             this.lblLastClose.AutoSize = true;
-            this.lblLastClose.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastClose.ForeColor = System.Drawing.Color.Blue;
             this.lblLastClose.Location = new System.Drawing.Point(378, 31);
             this.lblLastClose.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastClose.Name = "lblLastClose";
-            this.lblLastClose.Size = new System.Drawing.Size(96, 16);
+            this.lblLastClose.Size = new System.Drawing.Size(85, 16);
             this.lblLastClose.TabIndex = 6;
             this.lblLastClose.Text = "Last Close:";
             // 
             // lblLastHigh
             // 
             this.lblLastHigh.AutoSize = true;
-            this.lblLastHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastHigh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastHigh.ForeColor = System.Drawing.Color.Blue;
             this.lblLastHigh.Location = new System.Drawing.Point(378, 65);
             this.lblLastHigh.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastHigh.Name = "lblLastHigh";
-            this.lblLastHigh.Size = new System.Drawing.Size(88, 16);
+            this.lblLastHigh.Size = new System.Drawing.Size(77, 16);
             this.lblLastHigh.TabIndex = 7;
             this.lblLastHigh.Text = "Last High:";
             // 
             // lblLastLow
             // 
             this.lblLastLow.AutoSize = true;
-            this.lblLastLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastLow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastLow.ForeColor = System.Drawing.Color.Blue;
             this.lblLastLow.Location = new System.Drawing.Point(378, 100);
             this.lblLastLow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastLow.Name = "lblLastLow";
-            this.lblLastLow.Size = new System.Drawing.Size(80, 16);
+            this.lblLastLow.Size = new System.Drawing.Size(72, 16);
             this.lblLastLow.TabIndex = 8;
             this.lblLastLow.Text = "Last Low:";
             // 
             // lblLastOpen
             // 
             this.lblLastOpen.AutoSize = true;
-            this.lblLastOpen.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastOpen.ForeColor = System.Drawing.Color.Blue;
             this.lblLastOpen.Location = new System.Drawing.Point(378, 134);
             this.lblLastOpen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastOpen.Name = "lblLastOpen";
-            this.lblLastOpen.Size = new System.Drawing.Size(88, 16);
+            this.lblLastOpen.Size = new System.Drawing.Size(82, 16);
             this.lblLastOpen.TabIndex = 9;
             this.lblLastOpen.Text = "Last Open:";
             // 
             // lblLastVolume
             // 
             this.lblLastVolume.AutoSize = true;
-            this.lblLastVolume.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastVolume.ForeColor = System.Drawing.Color.Blue;
             this.lblLastVolume.Location = new System.Drawing.Point(378, 169);
             this.lblLastVolume.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastVolume.Name = "lblLastVolume";
-            this.lblLastVolume.Size = new System.Drawing.Size(104, 16);
+            this.lblLastVolume.Size = new System.Drawing.Size(97, 16);
             this.lblLastVolume.TabIndex = 10;
             this.lblLastVolume.Text = "Last Volume:";
             // 
             // lblShortPredicted
             // 
             this.lblShortPredicted.AutoSize = true;
-            this.lblShortPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShortPredicted.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblShortPredicted.ForeColor = System.Drawing.Color.Blue;
             this.lblShortPredicted.Location = new System.Drawing.Point(13, 166);
             this.lblShortPredicted.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblShortPredicted.Name = "lblShortPredicted";
-            this.lblShortPredicted.Size = new System.Drawing.Size(136, 16);
+            this.lblShortPredicted.Size = new System.Drawing.Size(119, 16);
             this.lblShortPredicted.TabIndex = 11;
             this.lblShortPredicted.Text = "Short Predicted:";
             // 
             // lblOrderStatus
             // 
             this.lblOrderStatus.AutoSize = true;
-            this.lblOrderStatus.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrderStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOrderStatus.ForeColor = System.Drawing.Color.Blue;
             this.lblOrderStatus.Location = new System.Drawing.Point(13, 234);
             this.lblOrderStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOrderStatus.Name = "lblOrderStatus";
-            this.lblOrderStatus.Size = new System.Drawing.Size(112, 16);
+            this.lblOrderStatus.Size = new System.Drawing.Size(98, 16);
             this.lblOrderStatus.TabIndex = 12;
             this.lblOrderStatus.Text = "Order Status:";
             // 
             // txtTime
             // 
             this.txtTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTime.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTime.Location = new System.Drawing.Point(199, 34);
             this.txtTime.Margin = new System.Windows.Forms.Padding(4);
             this.txtTime.Name = "txtTime";
@@ -326,7 +330,7 @@ namespace ProfitChartBotMLBased
             // txtDate
             // 
             this.txtDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDate.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDate.Location = new System.Drawing.Point(199, 67);
             this.txtDate.Margin = new System.Windows.Forms.Padding(4);
             this.txtDate.Name = "txtDate";
@@ -337,7 +341,7 @@ namespace ProfitChartBotMLBased
             // txtHigh
             // 
             this.txtHigh.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHigh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHigh.Location = new System.Drawing.Point(199, 100);
             this.txtHigh.Margin = new System.Windows.Forms.Padding(4);
             this.txtHigh.Name = "txtHigh";
@@ -348,7 +352,7 @@ namespace ProfitChartBotMLBased
             // txtShortPredicted
             // 
             this.txtShortPredicted.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtShortPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtShortPredicted.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtShortPredicted.Location = new System.Drawing.Point(199, 167);
             this.txtShortPredicted.Margin = new System.Windows.Forms.Padding(4);
             this.txtShortPredicted.Name = "txtShortPredicted";
@@ -359,7 +363,7 @@ namespace ProfitChartBotMLBased
             // txtOrderStatus
             // 
             this.txtOrderStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtOrderStatus.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrderStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOrderStatus.Location = new System.Drawing.Point(200, 233);
             this.txtOrderStatus.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrderStatus.Name = "txtOrderStatus";
@@ -370,7 +374,7 @@ namespace ProfitChartBotMLBased
             // txtLastVolume
             // 
             this.txtLastVolume.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLastVolume.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastVolume.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLastVolume.Location = new System.Drawing.Point(495, 167);
             this.txtLastVolume.Margin = new System.Windows.Forms.Padding(4);
             this.txtLastVolume.Name = "txtLastVolume";
@@ -381,7 +385,7 @@ namespace ProfitChartBotMLBased
             // txtLastOpen
             // 
             this.txtLastOpen.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLastOpen.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLastOpen.Location = new System.Drawing.Point(495, 134);
             this.txtLastOpen.Margin = new System.Windows.Forms.Padding(4);
             this.txtLastOpen.Name = "txtLastOpen";
@@ -392,7 +396,7 @@ namespace ProfitChartBotMLBased
             // txtLastLow
             // 
             this.txtLastLow.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLastLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastLow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLastLow.Location = new System.Drawing.Point(495, 100);
             this.txtLastLow.Margin = new System.Windows.Forms.Padding(4);
             this.txtLastLow.Name = "txtLastLow";
@@ -403,7 +407,7 @@ namespace ProfitChartBotMLBased
             // txtLastHigh
             // 
             this.txtLastHigh.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLastHigh.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastHigh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLastHigh.Location = new System.Drawing.Point(495, 67);
             this.txtLastHigh.Margin = new System.Windows.Forms.Padding(4);
             this.txtLastHigh.Name = "txtLastHigh";
@@ -414,7 +418,7 @@ namespace ProfitChartBotMLBased
             // txtLastClose
             // 
             this.txtLastClose.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLastClose.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLastClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLastClose.Location = new System.Drawing.Point(495, 34);
             this.txtLastClose.Margin = new System.Windows.Forms.Padding(4);
             this.txtLastClose.Name = "txtLastClose";
@@ -430,7 +434,7 @@ namespace ProfitChartBotMLBased
             // txtLow
             // 
             this.txtLow.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLow.Location = new System.Drawing.Point(199, 134);
             this.txtLow.Margin = new System.Windows.Forms.Padding(4);
             this.txtLow.Name = "txtLow";
@@ -441,19 +445,19 @@ namespace ProfitChartBotMLBased
             // lblLow
             // 
             this.lblLow.AutoSize = true;
-            this.lblLow.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLow.ForeColor = System.Drawing.Color.Blue;
             this.lblLow.Location = new System.Drawing.Point(13, 134);
             this.lblLow.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLow.Name = "lblLow";
-            this.lblLow.Size = new System.Drawing.Size(40, 16);
+            this.lblLow.Size = new System.Drawing.Size(39, 16);
             this.lblLow.TabIndex = 23;
             this.lblLow.Text = "Low:";
             // 
             // txtScanTime
             // 
             this.txtScanTime.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtScanTime.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtScanTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtScanTime.Location = new System.Drawing.Point(495, 201);
             this.txtScanTime.Margin = new System.Windows.Forms.Padding(4);
             this.txtScanTime.Name = "txtScanTime";
@@ -464,19 +468,19 @@ namespace ProfitChartBotMLBased
             // lblScanTime
             // 
             this.lblScanTime.AutoSize = true;
-            this.lblScanTime.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScanTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblScanTime.ForeColor = System.Drawing.Color.Blue;
             this.lblScanTime.Location = new System.Drawing.Point(378, 201);
             this.lblScanTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblScanTime.Name = "lblScanTime";
-            this.lblScanTime.Size = new System.Drawing.Size(88, 16);
+            this.lblScanTime.Size = new System.Drawing.Size(80, 16);
             this.lblScanTime.TabIndex = 25;
             this.lblScanTime.Text = "Last Scan:";
             // 
             // txtLongPredicted
             // 
             this.txtLongPredicted.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLongPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLongPredicted.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLongPredicted.Location = new System.Drawing.Point(199, 201);
             this.txtLongPredicted.Margin = new System.Windows.Forms.Padding(4);
             this.txtLongPredicted.Name = "txtLongPredicted";
@@ -487,14 +491,26 @@ namespace ProfitChartBotMLBased
             // longPredicted
             // 
             this.longPredicted.AutoSize = true;
-            this.longPredicted.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.longPredicted.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.longPredicted.ForeColor = System.Drawing.Color.Blue;
             this.longPredicted.Location = new System.Drawing.Point(13, 200);
             this.longPredicted.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.longPredicted.Name = "longPredicted";
-            this.longPredicted.Size = new System.Drawing.Size(128, 16);
+            this.longPredicted.Size = new System.Drawing.Size(117, 16);
             this.longPredicted.TabIndex = 27;
             this.longPredicted.Text = "Long Predicted:";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // smartStopToolStripMenuItem
+            // 
+            this.smartStopToolStripMenuItem.CheckOnClick = true;
+            this.smartStopToolStripMenuItem.Name = "smartStopToolStripMenuItem";
+            this.smartStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.smartStopToolStripMenuItem.Text = "Smart Stop?";
             // 
             // frmMain
             // 
@@ -531,7 +547,7 @@ namespace ProfitChartBotMLBased
             this.Controls.Add(this.lblNeedToConfigure);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Font = new System.Drawing.Font("Cousine", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -595,6 +611,8 @@ namespace ProfitChartBotMLBased
         private System.Windows.Forms.Label lblScanTime;
         private System.Windows.Forms.TextBox txtLongPredicted;
         private System.Windows.Forms.Label longPredicted;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem smartStopToolStripMenuItem;
     }
 }
 

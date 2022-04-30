@@ -8,7 +8,7 @@ namespace ProfitChartBotScanner
 {
     public interface IProfitChartBotScannerService
     {
-        void Initialize(ProfitChartBotMLBasedConfiguration configuration, IObserverProfitChartBotScanner observer);
+        void Initialize(ProfitChartBotMLBasedConfiguration configuration, IObserverProfitChartBotScanner observer, bool useSmartStop);
 
         void StartExecution();
 

@@ -68,6 +68,7 @@ namespace ProfitChartBotMLBased
             this.Name = "frmSelectRegion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Selecionar Regiao";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmSelecionarRegiao_Load);
             this.LocationChanged += new System.EventHandler(this.frmSelecionarRegiao_LocationChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmSelecionarRegiao_Paint);
