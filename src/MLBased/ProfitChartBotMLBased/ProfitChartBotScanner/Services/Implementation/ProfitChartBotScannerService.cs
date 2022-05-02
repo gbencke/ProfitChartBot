@@ -111,6 +111,20 @@ namespace ProfitChartBotScanner
                 _ProfitChartBotState = ProfitChartBotScannerStatus.Running;
                 _scanner = new ProfitChartScanHelper(_configuration, _ModelParameters);
 
+                ProfitChartScannerLogging.Debug("Cleaning Image Log...");
+
+                _scanner.CleanFolders();
+
+                ProfitChartScannerLogging.Debug("Decision Warm Up...");
+
+                var DecisionWarmUp = HTTPHelper.GetSignal(_configuration.GETPredictionURL,
+                    _ModelParameters.CurrentExchange,
+                    _ModelParameters.CurrentAsset,
+                    _ModelParameters.CurrentTimeFrame,
+                    "20210903",
+                    "930",
+                    APITimeOut);
+
                 while (_shouldRun)
                 {
                     Thread.Sleep(_configuration.IntervalScanning.Value);
@@ -193,6 +207,7 @@ namespace ProfitChartBotScanner
                             ProfitChartScannerLogging.Debug("Posting:");
                             ProfitChartScannerLogging.LogResult(nextResult);
                             HTTPHelper.PostQuote(_configuration.POSTQuoteURL, new QuoteToPost(nextResult), APITimeOut);
+                            ProfitChartScannerLogging.Debug("Quote Posted!!");
                         }
 
 
@@ -200,6 +215,9 @@ namespace ProfitChartBotScanner
                             nextResult.ProfitChartRealDate.Value >= _ModelParameters.MinimumDateTrade &&
                             nextResult.ProfitChartRealTime.Value <= _ModelParameters.MaximumTime)
                         {
+
+                            ProfitChartScannerLogging.Debug("Get Prediction...");
+
                             var Decision = HTTPHelper.GetSignal(_configuration.GETPredictionURL,
                                 _ModelParameters.CurrentExchange,
                                 _ModelParameters.CurrentAsset,

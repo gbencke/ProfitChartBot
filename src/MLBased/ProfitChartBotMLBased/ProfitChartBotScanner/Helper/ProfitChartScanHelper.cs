@@ -124,5 +124,13 @@ namespace ProfitChartBotScanner
 
         }
 
+        public void CleanFolders()
+        {
+            foreach(var currentFile in Directory.GetFiles(_configuration.ImageLogDir))
+            {
+                File.Delete(currentFile);
+            }
+        }
+
     }
 }
