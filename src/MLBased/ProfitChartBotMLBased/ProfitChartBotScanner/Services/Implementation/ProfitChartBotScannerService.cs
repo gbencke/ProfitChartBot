@@ -20,8 +20,8 @@ namespace ProfitChartBotScanner
         private Thread _scannerExecutionThread;
         private bool _shouldRun = false;
         private bool _useSmartStop = false;
-        private int _minCaptureOffset = -30;
-        private int _maxCaptureOffset = 30;
+        private int _minCaptureOffset = -80;
+        private int _maxCaptureOffset = 80;
         private int _currentOffset = 0;
 
         private double? _longStop;
@@ -218,13 +218,23 @@ namespace ProfitChartBotScanner
 
                             ProfitChartScannerLogging.Debug("Get Prediction...");
 
-                            var Decision = HTTPHelper.GetSignal(_configuration.GETPredictionURL,
-                                _ModelParameters.CurrentExchange,
-                                _ModelParameters.CurrentAsset,
-                                _ModelParameters.CurrentTimeFrame,
-                                nextResult.ProfitChartRealDate.Value.ToString(),
-                                nextResult.ProfitChartRealTime.Value.ToString(),
-                                APITimeOut);
+                            var Decision = null as SignalPrediction;
+
+                            try
+                            {
+                                Decision = HTTPHelper.GetSignal(_configuration.GETPredictionURL,
+                                    _ModelParameters.CurrentExchange,
+                                    _ModelParameters.CurrentAsset,
+                                    _ModelParameters.CurrentTimeFrame,
+                                    nextResult.ProfitChartRealDate.Value.ToString(),
+                                    nextResult.ProfitChartRealTime.Value.ToString(),
+                                    APITimeOut);
+                            }
+                            catch (Exception ex)
+                            {
+                                ProfitChartScannerLogging.Debug($"{ex.Message} - {ex.StackTrace}");
+                                continue;
+                            }
 
                             ProfitChartScannerLogging.Debug(String.Format("(Predicted):Long ({0:0.000}), Short ({1:0.000})", Decision.LongPredict, Decision.ShortPredict));
 
