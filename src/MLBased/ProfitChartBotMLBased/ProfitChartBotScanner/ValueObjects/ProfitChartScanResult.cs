@@ -217,93 +217,134 @@ namespace ProfitChartBotScanner
 
         public ProfitChartScanResult(double decisionBoundary, string exchange, string asset, string TimeFrame, string ResultFromTesseract)
         {
-            var tokens = ResultFromTesseract.ToUpper().Split('\n');
-
-            _Exchange = exchange;
-            _Asset = asset;
-            _TimeFrame = TimeFrame;
-            _DecisionBoundary = decisionBoundary;
-
-            foreach (var currentToken in tokens)
+            try
             {
-                var processedToken = currentToken.Trim();
-                var fullToken = processedToken;
-                processedToken = CleanString(processedToken);
-                processedToken = processedToken.Trim();
-                processedToken = processedToken.Replace(",", ".");
-                if (fullToken.StartsWith("ProfitChartBotTime".ToUpper()))
-                {
-                    processedToken = processedToken.Replace(".00", "");
-                    if(processedToken.Length == 6)
-                    {
-                        processedToken = processedToken.Substring(0, 4);
-                    }
-                    if (String.IsNullOrEmpty(processedToken))
-                    {
-                        return;
-                    }
-                    _ProfitChartTime = Convert.ToInt32(processedToken);
+                var tokens = ResultFromTesseract.ToUpper().Split('\n');
 
-                    var currentDateTime = DateTime.Now.ToString("yyyy-MM-dd") + 
-                        "T" + 
-                        (_ProfitChartTime.Value / 100).ToString("00") + 
-                        ":" + 
-                        (_ProfitChartTime.Value % 100).ToString("00");
+                _Exchange = exchange;
+                _Asset = asset;
+                _TimeFrame = TimeFrame;
+                _DecisionBoundary = decisionBoundary;
 
-                    var correctedTime = DateTime.Parse(currentDateTime).Subtract(TimeSpan.FromMinutes(5));
+                foreach (var currentToken in tokens)
+                {
+                    var processedToken = currentToken.Trim();
+                    var fullToken = processedToken;
+                    processedToken = CleanString(processedToken);
+                    processedToken = processedToken.Trim();
+                    processedToken = processedToken.Replace(",", ".");
+                    if (fullToken.StartsWith("ProfitChartBotTime".ToUpper()))
+                    {
+                        try
+                        {
+                            _ProfitChartTime = (int)Convert.ToDouble(processedToken);
+                        }catch(Exception ex)
+                        {
+                            ProfitChartScannerLogging.Debug(processedToken);
+                            throw ex;
+                        }
 
-                    _ProfitChartRealTime = correctedTime.Hour * 100 + correctedTime.Minute;
+                        if (_ProfitChartTime > 10000)
+                        {
+                            _ProfitChartTime /= 10000;
+                        }
 
-                }
-                if (fullToken.StartsWith("ProfitChartBotDate".ToUpper()))
-                {
-                    processedToken = processedToken.Replace(".00", "");
-                    _ProfitChartDate = Convert.ToInt32(processedToken);
+                        var currentDateTime = DateTime.Now.ToString("yyyy-MM-dd") +
+                            "T" +
+                            (_ProfitChartTime.Value / 100).ToString("00") +
+                            ":" +
+                            (_ProfitChartTime.Value % 100).ToString("00");
 
-                    _ProfitChartRealDate = ((_ProfitChartDate.Value - 1000000) + 20000000);
-                }
-                if (fullToken.StartsWith("ProfitChartBotHigh".ToUpper()))
-                {
-                    if(processedToken.Length == 6)
-                    {
-                        _ProfitChartHigh = Convert.ToDouble(processedToken) / 100;
+                        var correctedTime = DateTime.Now;
+
+                        try
+                        {
+                            correctedTime = DateTime.Parse(currentDateTime).Subtract(TimeSpan.FromMinutes(5));
+                        }
+                        catch (Exception ex)
+                        {
+                            ProfitChartScannerLogging.Debug(currentDateTime);
+                            throw ex;
+                        }
+
+                        _ProfitChartRealTime = correctedTime.Hour * 100 + correctedTime.Minute;
+
                     }
-                    else
+                    if (fullToken.StartsWith("ProfitChartBotDate".ToUpper()))
                     {
-                        _ProfitChartHigh = Convert.ToDouble(processedToken);
+                        processedToken = processedToken.Replace(".00", "");
+
+                        if(processedToken.Length > 7)
+                        {
+                            processedToken = processedToken.Substring(0, 7);
+                        }
+
+                        _ProfitChartDate = Convert.ToInt32(processedToken);
+
+                        _ProfitChartRealDate = ((_ProfitChartDate.Value - 1000000) + 20000000);
+                    }
+                    if (fullToken.StartsWith("ProfitChartBotHigh".ToUpper()))
+                    {
+                        if (processedToken.Length == 6)
+                        {
+                            _ProfitChartHigh = Convert.ToDouble(processedToken) / 100;
+                        }
+                        else
+                        {
+                            _ProfitChartHigh = Convert.ToDouble(processedToken);
+                        }
+                    }
+                    if (fullToken.StartsWith("ProfitChartBotLow".ToUpper()))
+                    {
+                        if (processedToken.Length == 6)
+                        {
+                            _ProfitChartLow = Convert.ToDouble(processedToken) / 100;
+                        }
+                        else
+                        {
+                            _ProfitChartLow = Convert.ToDouble(processedToken);
+                        }
+                    }
+                    if (fullToken.StartsWith("ProfitChartBotLastClose".ToUpper()))
+                    {
+                        if (processedToken.Length == 6)
+                        {
+                            _ProfitChartLastClose = Convert.ToDouble(processedToken) / 100;
+                        }
+                        else
+                        {
+                            _ProfitChartLastClose = Convert.ToDouble(processedToken);
+                        }
+                    }
+                    if (fullToken.StartsWith("ProfitChartBotLastHigh".ToUpper()))
+                    {
+                        if (processedToken.Length == 6)
+                        {
+                            _ProfitChartLastHigh = Convert.ToDouble(processedToken) / 100;
+                        }
+                        else
+                        {
+                            _ProfitChartLastHigh = Convert.ToDouble(processedToken);
+                        }
+                    }
+                    if (fullToken.StartsWith("ProfitChartBotLastLow".ToUpper()) || fullToken.ToUpper().Contains("LastLow".ToUpper()))
+                    {
+                        _ProfitChartLastLow = Convert.ToDouble(processedToken);
+                    }
+                    if (fullToken.StartsWith("ProfitChartBotLastOpen".ToUpper()) || fullToken.ToUpper().Contains("LastOpen".ToUpper()))
+                    {
+                        _ProfitChartLastOpen = Convert.ToDouble(processedToken);
+                    }
+                    if (fullToken.StartsWith("ProfitChartBotLastVolume".ToUpper()))
+                    {
+                        _ProfitChartLastVolume = Convert.ToDouble(processedToken);
                     }
                 }
-                if (fullToken.StartsWith("ProfitChartBotLow".ToUpper()))
-                {
-                    _ProfitChartLow = Convert.ToDouble(processedToken);
-                }
-                if (fullToken.StartsWith("ProfitChartBotLastClose".ToUpper()))
-                {
-                    _ProfitChartLastClose = Convert.ToDouble(processedToken);
-                }
-                if (fullToken.StartsWith("ProfitChartBotLastHigh".ToUpper()))
-                {
-                    if(processedToken.Length == 6)
-                    {
-                        _ProfitChartLastHigh = Convert.ToDouble(processedToken) / 100;
-                    }
-                    else
-                    {
-                        _ProfitChartLastHigh = Convert.ToDouble(processedToken);
-                    }
-                }
-                if (fullToken.StartsWith("ProfitChartBotLastLow".ToUpper()) || fullToken.ToUpper().Contains("LastLow".ToUpper()))
-                {
-                    _ProfitChartLastLow = Convert.ToDouble(processedToken);
-                }
-                if (fullToken.StartsWith("ProfitChartBotLastOpen".ToUpper()) || fullToken.ToUpper().Contains("LastOpen".ToUpper()))
-                {
-                    _ProfitChartLastOpen = Convert.ToDouble(processedToken);
-                }
-                if (fullToken.StartsWith("ProfitChartBotLastVolume".ToUpper()))
-                {
-                    _ProfitChartLastVolume = Convert.ToDouble(processedToken);
-                }
+            }
+            catch (Exception ex)
+            {
+                ProfitChartScannerLogging.Debug(ResultFromTesseract);
+                ProfitChartScannerLogging.Debug($"{ex.Message} - {ex.StackTrace}");
             }
         }
 
@@ -322,6 +363,12 @@ namespace ProfitChartBotScanner
                     _ProfitChartLastVolume.HasValue;
             }
         }
+
+        public override string ToString()
+        {
+            return $"Date:{_ProfitChartDate}, Time:{_ProfitChartTime}, High:{_ProfitChartHigh}, Low:{_ProfitChartLow}, LastClose:{_ProfitChartLastClose}, LastHigh:{_ProfitChartLastHigh}, LastLow:{_ProfitChartLastLow}, LastOpen:{_ProfitChartLastOpen}, LastVolume:{_ProfitChartLastVolume}";
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is ProfitChartScanResult))

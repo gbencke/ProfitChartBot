@@ -106,6 +106,7 @@ namespace ProfitChartBotScanner
             }
             else
             {
+                ProfitChartScannerLogging.Debug($"Error in scanning:{ret}");
                 return null;
             }
         }
