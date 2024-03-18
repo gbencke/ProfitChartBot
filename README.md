@@ -15,6 +15,22 @@ In order for the system to work properly, it is necessary to configure it. Pleas
 
 ![Configuration](./configuration.png)
 
+
+* **Indicators Region**: A
+* **Start Long Region**: A
+* **Start Short Region**: A
+* **Close Positions**: A
+* **Tesseract Executable**: A
+* **Tessdata Location**: A
+* **GET Parameters URL**: A
+* **POST Quote URL**: A
+* **GET Prediction URL**: A
+* **Text Log Dir**: A
+* **Image Log Dir**: A
+* **Profit Scan Interval**: A
+
+
+
 ```diff
 - This repo is deprecated, 
 - as Nelogica has a new realtime quote / order routing API that is very affordable, 
