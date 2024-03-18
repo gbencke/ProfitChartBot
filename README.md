@@ -16,4 +16,4 @@ In order for the system to work properly, it is necessary to configure it. Pleas
 ![Configuration](./configuration.png)
 
 
-$${\color{red}This repo is deprecated, as Nelogica has a new realtime quote / order routing API that is very affordable, I strongly suggest using it instead of this project.}$$
+<code style="color: red">This repo is deprecated, as Nelogica has a new realtime quote / order routing API that is very affordable, I strongly suggest using it instead of this project.</code>
