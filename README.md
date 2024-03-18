@@ -15,21 +15,18 @@ In order for the system to work properly, it is necessary to configure it. Pleas
 
 ![Configuration](./configuration.png)
 
-
-* **Indicators Region**: A
-* **Start Long Region**: A
-* **Start Short Region**: A
-* **Close Positions**: A
-* **Tesseract Executable**: A
-* **Tessdata Location**: A
-* **GET Parameters URL**: A
-* **POST Quote URL**: A
-* **GET Prediction URL**: A
-* **Text Log Dir**: A
-* **Image Log Dir**: A
-* **Profit Scan Interval**: A
-
-
+* **Indicators Region**: The region in the screen where the indicators are located, and we will try to scrap them
+* **Start Long Region**: The Buy Button coordinates in ProfitChart
+* **Start Short Region**: The Sell Button coordinates in ProfitChart
+* **Close Positions**: The Close Positions Button coordinates in ProfitChart
+* **Tesseract Executable**: The tesseract exe location
+* **Tessdata Location**: The Tessdata that contains the OCR Model.
+* **GET Parameters URL**: The URL for the GetParameters Endpoint
+* **POST Quote URL**: The URL for the Post OHLC Quote Endpoint
+* **GET Prediction URL**: The URL for the GetPrediction URL
+* **Text Log Dir**: A Directory for the Bot Log
+* **Image Log Dir**: A Directory for the screenshots taken for the tesseract OCR Process
+* **Profit Scan Interval**: The interval in ms for the Profit Scan.
 
 ```diff
 - This repo is deprecated, 
