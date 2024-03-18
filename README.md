@@ -7,4 +7,13 @@ It works by scraping and doing an Screen OCR of the ProfitChart screen as we can
 
 ![Screen Scraping](./Scraping.png)
 
-$${\color{red}Red}$$
+We can see above that the system will scrap the screen, get the quotes, then will send to the ML Model hosted by the [pyAutoTradingBot](https://github.com/gbencke/pyAutoTradingBot) API and it will return a score that will determine a long short position. In case of a signal, it will send a click to the desktop interface.
+
+# Configuration
+
+In order for the system to work properly, it is necessary to configure it. Please click in the configuration menu item in the system menu to display the configuration window:
+
+![Configuration](./configuration.png)
+
+
+$${\color{red}This repo is deprecated, as Nelogica has a new realtime quote / order routing API that is very affordable, I strongly suggest using it instead of this project.}$$
